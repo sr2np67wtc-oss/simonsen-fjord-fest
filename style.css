@@ -130,3 +130,18 @@ footer {
     font-size: 0.9rem;
     color: #555;
 }
+/* Sørg for at alle uker vises */
+.fc-daygrid-body {
+    min-height: 480px !important; /* øker høyden */
+}
+
+/* Juster kalenderen visuelt */
+.calendar {
+    max-width: 450px;
+    margin: 25px auto;
+    text-align: center;
+    background-color: #fafafa;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
