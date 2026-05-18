@@ -1,246 +1,132 @@
-/* GLOBALT */
+/* --- Grunnleggende layout --- */
 body {
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    color: #000;
+    background-color: #f9f9f9;
+    color: #222;
 }
 
-/* HEADER */
 header {
-    background: #ffffff;
-    border-bottom: 1px solid #ddd;
-    padding: 20px 40px; /* mer luft */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 10px 0;
 }
 
 .header-container {
-    max-width: 1100px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo {
-    height: 70px; /* litt større logo */
-    width: auto;
-    display: block;
-}
-
-/* NAVIGASJON */
-nav {
-    display: flex;
-    gap: 28px;
+    height: 50px;
 }
 
 nav a {
+    margin: 0 10px;
     text-decoration: none;
     color: #000;
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: 600;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #0078d7;
 }
 
-/* MOBIL */
-@media (max-width: 600px) {
-    .header-container {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .logo {
-        height: 60px;
-    }
-
-    nav {
-        gap: 18px;
-    }
-}
-
-
-/* NAVIGASJON */
-nav {
-    display: flex;
-    gap: 24px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* PRODUKTER */
+/* --- Produkter --- */
 .products {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 40px;
-    flex-wrap: wrap;
-}
-
-.products h2 {
-    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .product {
-    background: white;
-    padding: 20px;
-    width: 280px;
+    display: inline-block;
+    width: 260px;
+    margin: 15px;
+    background-color: #fff;
     border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    padding: 15px;
 }
 
 .product img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .price {
     font-weight: bold;
-    margin-top: 10px;
+    color: #0078d7;
 }
 
-/* BOOKING */
-.booking {
-    background: white;
-    padding: 40px;
-    margin: 40px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.form-container {
+.delivery-summary {
     margin-top: 20px;
+    font-size: 0.95rem;
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #222;
-    color: white;
-    margin-top: 40px;
-}
-
-/* MOBIL */
-@media (max-width: 600px) {
-    .header-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .logo {
-        height: 42px !important;
-    }
-
-    nav {
-        gap: 16px;
-    }
-}
-/* HEADER – forbedret høyde og balanse */
-header {
-    background: #ffffff;
-    border-bottom: 1px solid #ddd;
-    padding: 30px 60px; /* mer luft over og under */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    height: 90px; /* større og tydeligere logo */
-    width: auto;
-    display: block;
-}
-
-/* NAVIGASJON */
-nav {
-    display: flex;
-    gap: 32px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    font-size: 1.05rem;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* MOBIL */
-@media (max-width: 600px) {
-    .header-container {
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    .logo {
-        height: 70px;
-    }
-
-    nav {
-        gap: 20px;
-    }
-}
+/* --- Kalender --- */
 .calendar {
-    max-width: 400px;
-    margin: 25px auto;
+    max-width: 500px;
+    margin: 30px auto;
     text-align: center;
     background-color: #fafafa;
-    padding: 12px;
+    padding: 15px;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-/* Gjør kalenderen smalere og lavere */
-.calendar {
-    max-width: 380px;        /* smalere bredde */
-    margin: 20px auto;
-    text-align: center;
-    background-color: #fafafa;
-    padding: 10px;
+
+#utleieKalender {
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    padding: 10px;
 }
 
-/* Juster høyden på selve kalenderen */
-#utleieKalender .fc-daygrid-body {
-    height: 280px !important; /* lavere høyde */
+/* Sørg for at alle uker vises */
+.fc-daygrid-body {
+    min-height: 380px !important;
+}
+
+/* Grønn = ledig */
+.fc-daygrid-day {
+    background-color: #e8fbe8 !important;
+}
+
+/* Rød = opptatt */
+.fc-event {
+    background-color: #ff4d4d !important;
+    border: none !important;
 }
 
 /* Mindre tekst og kompakt layout */
 .fc-daygrid-day-number {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
 .fc-toolbar-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
+/* --- Booking --- */
+.booking {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
 
+.form-container iframe {
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
 
+/* --- Footer --- */
+footer {
+    background-color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
