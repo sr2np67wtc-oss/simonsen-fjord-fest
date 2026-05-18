@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     height: 'auto',
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const sheetId = 'HER_LIMER_DU_INN_ID_FRA_LENKEN'; // bare ID‑delen mellom /d/ og /edit
+        const sheetId = "1rzVAQZMifXlN3CZbVh4NNXkKvAm9dM5YzoEbGhO8_6k";
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
         const response = await fetch(url);
         const text = await response.text();
