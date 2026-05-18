@@ -208,12 +208,29 @@ nav a:hover {
         gap: 20px;
     }
 }
+.calendar {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.calendar h2 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.calendar p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
 .calendar iframe {
-    max-width: 700px;
-    width: 90%;
-    height: 500px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
     display: block;
     margin: 0 auto;
 }
+
