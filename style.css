@@ -219,7 +219,7 @@ nav a:hover {
 }
 /* Gjør kalenderen smalere og lavere */
 .calendar {
-    max-width: 420px;        /* smalere bredde */
+    max-width: 380px;        /* smalere bredde */
     margin: 20px auto;
     text-align: center;
     background-color: #fafafa;
@@ -230,7 +230,7 @@ nav a:hover {
 
 /* Juster høyden på selve kalenderen */
 #utleieKalender .fc-daygrid-body {
-    height: 250px !important; /* lavere høyde */
+    height: 220px !important; /* lavere høyde */
 }
 
 /* Mindre tekst og kompakt layout */
