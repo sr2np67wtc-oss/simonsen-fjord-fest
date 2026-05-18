@@ -118,68 +118,68 @@ document.addEventListener('DOMContentLoaded', async function() {
     locale: 'no',
     height: 'auto',
 
-    events: async function(fetchInfo, successCallback, failureCallback) {
-      try {
-        const sheetId = "1rzVAQZMifXlN3CZbVh4NNXkKvAm9dM5YzoEbGhO8_6k";
-        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-        const response = await fetch(url);
-        const text = await response.text();
+events: async function(fetchInfo, successCallback, failureCallback) {
+  try {
+    const sheetId = "1rzVAQZMifXlN3CZbVh4NNXkKvAm9dM5YzoEbGhO8_6k";
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+    const response = await fetch(url);
+    const text = await response.text();
+    const json = JSON.parse(text.substring(47, text.length - 2));
 
-        // Google gviz-wrapper → fjern “garbage” rundt JSON
-        const json = JSON.parse(text.substring(47, text.length - 2));
+    const rows = json.table.rows
+      .filter(r => r.c && r.c[1] && r.c[2])
+      .map(r => {
+        const title = r.c[0]?.v || 'Opptatt';
+        const startCell = r.c[1];
+        const endCell = r.c[2];
 
-        const rows = json.table.rows
-          .filter(r => r.c && r.c[1] && r.c[2]) // må ha start og slutt
-          .map(r => {
-            const title = r.c[0]?.v || 'Opptatt';
-            const startCell = r.c[1];
-            const endCell = r.c[2];
+        // Håndter både tekst og datoobjekter
+        const getDate = (cell) => {
+          if (!cell) return null;
 
-            const getDate = (cell) => {
-              if (!cell) return null;
+          // Hvis Google gir et objekt med year, month, day
+          if (cell.v && typeof cell.v === 'object' &&
+              cell.v.year !== undefined &&
+              cell.v.month !== undefined &&
+              cell.v.day !== undefined) {
+            const y = cell.v.year;
+            const m = String(cell.v.month + 1).padStart(2, '0');
+            const d = String(cell.v.day).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+          }
 
-              // 1) Hvis Google allerede gir en tekst (f.eks. "2026-05-24")
-              if (typeof cell.v === 'string') {
-                return cell.v;
-              }
+          // Hvis det er en tekststreng (f.eks. "2026-05-24")
+          if (typeof cell.v === 'string') {
+            return cell.v;
+          }
 
-              // 2) Hvis det finnes en formatert streng (cell.f)
-              if (cell.f && typeof cell.f === 'string') {
-                return cell.f;
-              }
+          // Hvis det finnes en formatert verdi (cell.f)
+          if (cell.f && typeof cell.f === 'string') {
+            return cell.f;
+          }
 
-              // 3) Hvis det er et dato-objekt (year, month, day)
-              if (cell.v && typeof cell.v === 'object' &&
-                  cell.v.year !== undefined &&
-                  cell.v.month !== undefined &&
-                  cell.v.day !== undefined) {
-                const y = cell.v.year;
-                const m = String(cell.v.month + 1).padStart(2, '0');
-                const d = String(cell.v.day).padStart(2, '0');
-                return `${y}-${m}-${d}`;
-              }
+          return null;
+        };
 
-              return null;
-            };
+        const start = getDate(startCell);
+        const end = getDate(endCell);
 
-            const start = getDate(startCell);
-            const end = getDate(endCell);
+        return {
+          title: title,
+          start: start,
+          end: end,
+          color: '#ff4d4d'
+        };
+      })
+      .filter(e => e.start && e.end);
 
-            return {
-              title: title,
-              start: start,
-              end: end,
-              color: '#ff4d4d'
-            };
-          })
-          .filter(e => e.start && e.end); // dropp rader uten gyldige datoer
+    successCallback(rows);
+  } catch (error) {
+    console.error('Feil ved henting av Google Sheet:', error);
+    failureCallback(error);
+  }
+}
 
-        successCallback(rows);
-      } catch (error) {
-        console.error('Feil ved henting av Google Sheet:', error);
-        failureCallback(error);
-      }
-    }
   });
 
   calendar.render();
