@@ -112,6 +112,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
   var calendarEl = document.getElementById('utleieKalender');
+
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     locale: 'no',
@@ -123,26 +124,59 @@ document.addEventListener('DOMContentLoaded', async function() {
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
         const response = await fetch(url);
         const text = await response.text();
-        const json = JSON.parse(text.substr(47).slice(0, -2));
 
-        const rows = json.table.rows.map(r => {
-          const title = r.c[0]?.v || '';
-          const startRaw = r.c[1]?.v || '';
-          const endRaw = r.c[2]?.v || '';
+        // Google gviz-wrapper → fjern “garbage” rundt JSON
+        const json = JSON.parse(text.substring(47, text.length - 2));
 
-          // Konverter DD-MM-YYYY → YYYY-MM-DD
-const convert = d => d; // bruker datoene direkte fra arket
+        const rows = json.table.rows
+          .filter(r => r.c && r.c[1] && r.c[2]) // må ha start og slutt
+          .map(r => {
+            const title = r.c[0]?.v || 'Opptatt';
+            const startCell = r.c[1];
+            const endCell = r.c[2];
 
-          return {
-            title: title,
-            start: convert(startRaw),
-            end: convert(endRaw),
-            color: '#ff4d4d'
-          };
-        });
+            const getDate = (cell) => {
+              if (!cell) return null;
+
+              // 1) Hvis Google allerede gir en tekst (f.eks. "2026-05-24")
+              if (typeof cell.v === 'string') {
+                return cell.v;
+              }
+
+              // 2) Hvis det finnes en formatert streng (cell.f)
+              if (cell.f && typeof cell.f === 'string') {
+                return cell.f;
+              }
+
+              // 3) Hvis det er et dato-objekt (year, month, day)
+              if (cell.v && typeof cell.v === 'object' &&
+                  cell.v.year !== undefined &&
+                  cell.v.month !== undefined &&
+                  cell.v.day !== undefined) {
+                const y = cell.v.year;
+                const m = String(cell.v.month + 1).padStart(2, '0');
+                const d = String(cell.v.day).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+              }
+
+              return null;
+            };
+
+            const start = getDate(startCell);
+            const end = getDate(endCell);
+
+            return {
+              title: title,
+              start: start,
+              end: end,
+              color: '#ff4d4d'
+            };
+          })
+          .filter(e => e.start && e.end); // dropp rader uten gyldige datoer
 
         successCallback(rows);
       } catch (error) {
+        console.error('Feil ved henting av Google Sheet:', error);
         failureCallback(error);
       }
     }
@@ -151,6 +185,7 @@ const convert = d => d; // bruker datoene direkte fra arket
   calendar.render();
 });
 </script>
+
 
 </body>
 </html>
