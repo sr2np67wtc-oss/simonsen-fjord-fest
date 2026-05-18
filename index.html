@@ -6,6 +6,40 @@
     <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- FullCalendar CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+
+    <style>
+        /* Kalender-styling */
+        .calendar {
+            max-width: 700px;
+            margin: 40px auto;
+            text-align: center;
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #utleieKalender {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        /* Grønn bakgrunn = ledig */
+        .fc-daygrid-day {
+            background-color: #e8fbe8 !important;
+        }
+
+        /* Rød bakgrunn = opptatt */
+        .fc-event {
+            background-color: #ff4d4d !important;
+            border: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,14 +85,8 @@
 <!-- KALENDERSEKSJON -->
 <section id="kalender" class="calendar">
     <h2>Tilgjengelighet</h2>
-    <p>Sjekk når utstyret er ledig eller opptatt.</p>
-
-<iframe 
-    src="https://calendar.google.com/calendar/embed?src=459479dc846ff804f5cd38bd61145fdd33ad1610be446b9e4af1e7a1babd566e%40group.calendar.google.com&ctz=Europe%2FOslo"
-    frameborder="0" 
-    scrolling="no">
-</iframe>
-
+    <p>Grønn = ledig • Rød = opptatt</p>
+    <div id="utleieKalender"></div>
 </section>
 
 <section id="booking" class="booking">
@@ -72,16 +100,8 @@
             height="900" 
             frameborder="0" 
             marginheight="0" 
-            marginwidth="0"
-            onerror="this.style.display='none'; document.getElementById('form-fallback').style.display='block';">
+            marginwidth="0">
         </iframe>
-
-        <div id="form-fallback" style="display:none; text-align:center; margin-top:20px;">
-            <p>Skjemaet kunne ikke vises direkte. Du kan åpne det her:</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform" target="_blank" style="font-weight:bold; color:#000;">
-                Åpne bookingskjemaet
-            </a>
-        </div>
     </div>
 </section>
 
@@ -89,6 +109,23 @@
     <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
     <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
+
+<!-- FULLCALENDAR SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('utleieKalender');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'no',
+    height: 'auto',
+    events: [
+      { title: 'Opptatt', start: '2026-05-24', end: '2026-05-26' },
+      { title: 'Opptatt', start: '2026-06-07', end: '2026-06-09' }
+    ]
+  });
+  calendar.render();
+});
+</script>
 
 </body>
 </html>
