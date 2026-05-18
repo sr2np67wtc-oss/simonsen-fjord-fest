@@ -152,3 +152,59 @@ footer {
         gap: 16px;
     }
 }
+/* HEADER – forbedret høyde og balanse */
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    padding: 30px 60px; /* mer luft over og under */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 90px; /* større og tydeligere logo */
+    width: auto;
+    display: block;
+}
+
+/* NAVIGASJON */
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* MOBIL */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .logo {
+        height: 70px;
+    }
+
+    nav {
+        gap: 20px;
+    }
+}
