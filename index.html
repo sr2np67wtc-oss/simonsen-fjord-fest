@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=30">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- FullCalendar -->
@@ -39,6 +39,7 @@
       <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
       <p class="price">500 kr / Helg (3 dager)</p>
       <p class="price">800 kr / Uke (7 dager)</p>
+      <button class="bestill-btn" onclick="scrollToBooking()">Bestill</button>
     </div>
 
     <div class="product">
@@ -47,6 +48,7 @@
       <p>Perfekt til taler, karaoke og arrangementer.</p>
       <p class="price">100 kr / Helg (3 dager)</p>
       <p class="price">150 kr / Uke (7 dager)</p>
+      <button class="bestill-btn" onclick="scrollToBooking()">Bestill</button>
     </div>
 
   </div>
@@ -79,6 +81,10 @@
 </footer>
 
 <script>
+function scrollToBooking() {
+  document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
   const calendarEl = document.getElementById('utleieKalender');
 
@@ -87,7 +93,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     locale: 'no',
     firstDay: 1,
 
-    // gjør kalenderen mindre og slankere
     height: "auto",
     contentHeight: "auto",
     aspectRatio: 1.6,
