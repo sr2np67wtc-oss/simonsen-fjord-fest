@@ -31,7 +31,7 @@
     }
 
     .fc-daygrid-day {
-      background-color: #e8fbe8 !important; /* grønn bakgrunn = ledig */
+      background-color: #e8fbe8 !important; /* grønn = ledig */
     }
 
     .fc-event {
@@ -57,30 +57,6 @@
   </div>
 </header>
 
-<section id="utleie" class="products">
-  <h2>Utleieprodukter</h2>
-
-  <div class="product">
-    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680">
-    <h3>JBL PartyBox 320</h3>
-    <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
-    <p class="price">500 kr / Helg (3 dager)</p>
-    <p class="price">800 kr / Uke (7 dager)</p>
-  </div>
-
-  <div class="product">
-    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605">
-    <h3>Trådløs Mikrofon</h3>
-    <p>Perfekt til taler, karaoke og arrangementer. 2 stk</p>
-    <p class="price">100 kr / Helg (3 dager)</p>
-    <p class="price">150 kr / Uke (7 dager)</p>
-  </div>
-
-  <p class="delivery-summary">
-    🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.
-  </p>
-</section>
-
 <section id="kalender" class="calendar">
   <h2>Tilgjengelighet</h2>
   <p>Grønn = ledig • Rød = opptatt</p>
@@ -103,7 +79,7 @@
   <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
-<!-- FULLCALENDAR SCRIPT MED GOOGLE SHEETS API -->
+<!-- FULLCALENDAR SCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
   const calendarEl = document.getElementById('utleieKalender');
@@ -118,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
         const csvUrl =
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPBUWpbOokMYOE4hg8yWOCKRqrKcRYTlAQkiNEX9jj1cZh6l780N3HmYRtKYn5cDu9RMz83SvTtZvb/pub?output=csv";
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPBUWpbOokMYOE4hg8yWOCKRqrKcRYTlAQkiNEX9jj1cZh6l780N3HmYRtKYn5cDu9RMz83SvTtZvb/pub?output=csv&sheet=utleie-kalender";
 
         const res = await fetch(csvUrl);
         const csv = await res.text();
@@ -126,12 +102,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         let events = [];
 
-        for (let r = 0; r < rows.length; r++) {
+        for (let r = 1; r < rows.length; r++) {
           for (let c = 0; c < rows[r].length; c++) {
             const cell = rows[r][c].trim();
 
             if (cell.toUpperCase() === "TRUE") {
-              const header = rows[r - 1]?.[c];
+              const header = rows[0][c];
               if (!header) continue;
 
               const parts = header.split(".");
