@@ -14,7 +14,7 @@
   <style>
     .calendar {
       max-width: 520px;
-      margin: 30px auto; /* mer luft under overskriften */
+      margin: 30px auto;
       text-align: center;
       background-color: #fafafa;
       padding: 12px;
@@ -37,23 +37,20 @@
       border: none !important;
     }
 
-    /* Ukenummer – ryddig og balansert */
     .fc-daygrid-week-number {
       width: 46px !important;
       text-align: center;
       font-weight: 500;
-      font-size: 0.85em; /* mindre font */
+      font-size: 0.85em;
       color: #555;
       background-color: #f0f0f0;
       border-radius: 4px;
     }
 
-    /* Litt luft mellom uke og mandag */
     .fc-daygrid-day-frame {
       padding-left: 8px;
     }
 
-    /* Mobiltilpasning – skjul ukenummer og juster padding */
     @media (max-width: 600px) {
       .fc-daygrid-week-number {
         display: none;
@@ -190,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return {
               title: title,
               start: start,
-              end: end,
+              end: end + "T23:59:59",   // 🔥 FIKSER SLUTTDATOEN
               color: '#ff4d4d'
             };
           })
