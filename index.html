@@ -13,8 +13,8 @@
 
   <style>
     .calendar {
-      max-width: 520px; /* bredere kalender */
-      margin: 20px auto;
+      max-width: 520px;
+      margin: 30px auto; /* mer luft under overskriften */
       text-align: center;
       background-color: #fafafa;
       padding: 12px;
@@ -37,11 +37,12 @@
       border: none !important;
     }
 
-    /* Ukenummer – tydelig, men ryddig */
+    /* Ukenummer – ryddig og balansert */
     .fc-daygrid-week-number {
       width: 46px !important;
       text-align: center;
       font-weight: 500;
+      font-size: 0.85em; /* mindre font */
       color: #555;
       background-color: #f0f0f0;
       border-radius: 4px;
@@ -52,13 +53,14 @@
       padding-left: 8px;
     }
 
-    /* Mobiltilpasning – skjul ukenummer på små skjermer */
+    /* Mobiltilpasning – skjul ukenummer og juster padding */
     @media (max-width: 600px) {
       .fc-daygrid-week-number {
         display: none;
       }
       .calendar {
         max-width: 100%;
+        padding: 8px;
       }
     }
   </style>
