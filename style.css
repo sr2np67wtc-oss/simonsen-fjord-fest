@@ -80,15 +80,25 @@ nav a:hover {
   display: block;
 }
 
+/* 🔧 MIDTSTILLER ALL TEKST UNDER PRODUKTENE */
+.product p {
+  text-align: center;
+  margin: 4px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
 .product h3 {
   font-size: 19px;
   margin: 10px 0;
+  text-align: center;
 }
 
 .price {
   font-weight: bold;
   font-size: 15px;
   margin: 4px 0;
+  text-align: center;
 }
 
 /* ====== BESTILL-KNAPP ====== */
@@ -122,3 +132,47 @@ nav a:hover {
   margin-bottom: 6px;
 }
 
+#utleieKalender {
+  transform: scale(0.7);
+  transform-origin: top center;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* ====== BOOKING ====== */
+.booking {
+  max-width: 900px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+
+.booking h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 26px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 24px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+footer a {
+  color: #66aaff;
+}
+
+/* ====== MOBIL ====== */
+@media (max-width: 600px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #utleieKalender {
+    transform: scale(0.6);
+  }
+}
