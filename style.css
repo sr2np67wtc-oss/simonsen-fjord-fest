@@ -52,9 +52,9 @@ nav a:hover {
 /* ⭐ GRID – dette er layouten fra i går */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px;                 /* perfekt mellomting */
-  justify-items: center;     /* sentrerer boksene */
+  grid-template-columns: repeat(auto-fit, 200px); /* faste kolonner */
+  justify-content: center;                        /* midtstiller alt */
+  gap: 16px;                                      /* perfekt mellomting */
 }
 
 /* ⭐ PRODUKTKORT – samme look som i går */
@@ -64,9 +64,8 @@ nav a:hover {
   padding: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   text-align: center;
-  width: 100%;
-  max-width: 200px;          /* perfekt bredde */
-  min-height: 260px;         /* lik høyde */
+  width: 200px;            /* fast bredde */
+  min-height: 260px;       /* lik høyde */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -97,55 +96,15 @@ nav a:hover {
   margin-top: 10px;
 }
 
-/* ====== KALENDER ====== */
-.calendar {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.calendar h2 {
-  text-align: center;
-}
-
-#utleieKalender {
-  max-width: 100%;
-  margin: auto;
-}
-
-/* ====== BOOKING ====== */
-.booking {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.form-container {
-  margin-top: 20px;
-}
-
-/* ====== FOOTER ====== */
-footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-}
-
-footer a {
-  color: #66aaff;
-  text-decoration: none;
-}
-
 /* ====== MOBIL ====== */
 @media (max-width: 480px) {
   .products {
-    grid-template-columns: repeat(2, 1fr); /* to kolonner – dette var nøkkelen */
-    gap: 16px;                             /* litt mindre gap på mobil */
+    grid-template-columns: repeat(2, 1fr); /* to kolonner på mobil */
+    gap: 14px;
   }
 
   .product {
+    width: 100%;
     max-width: 180px;
     margin: auto;
   }
