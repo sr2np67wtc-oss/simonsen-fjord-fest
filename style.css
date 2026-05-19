@@ -96,4 +96,87 @@ nav a:hover {
   grid-column: 1 / -1;
   text-align: center;
   font-size: 14px;
-  margin-top
+  margin-top: 10px;
+}
+
+/* ====== KALENDER ====== */
+.calendar {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.calendar h2 {
+  margin-bottom: 6px;
+}
+
+.calendar p {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* her gjør vi kalenderen tydelig mindre */
+#utleieKalender {
+  transform: scale(0.7);
+  transform-origin: top center;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* ====== BOOKING ====== */
+.booking {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.booking h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  margin-top: 10px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+footer a {
+  color: #66aaff;
+}
+
+/* ====== MOBIL ====== */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .product {
+    max-width: 220px;
+  }
+
+  #utleieKalender {
+    transform: scale(0.65);
+  }
+}
