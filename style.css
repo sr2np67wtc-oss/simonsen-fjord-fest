@@ -94,47 +94,12 @@ nav a:hover {
 }
 
 #utleieKalender {
-  transform: scale(0.85);
+  transform: scale(0.9);
   transform-origin: top center;
+  overflow: visible;
 }
 
 /* ====== BOOKING ====== */
 .booking {
   max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.form-container {
-  margin-top: 10px;
-}
-
-/* ====== FOOTER ====== */
-footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 14px;
-}
-
-footer a {
-  color: #66aaff;
-}
-
-/* ====== MOBIL ====== */
-@media (max-width: 600px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .product {
-    max-width: 200px;
-  }
-
-  #utleieKalender {
-    transform: scale(0.75);
-  }
-}
+  margin: 
