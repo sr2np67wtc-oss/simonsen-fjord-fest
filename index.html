@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- FullCalendar -->
@@ -57,7 +57,6 @@
   </p>
 </section>
 
-
 <!-- ===================== KALENDER ===================== -->
 <section id="kalender" class="calendar">
   <h2>Tilgjengelighet</h2>
@@ -92,8 +91,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     initialView: 'dayGridMonth',
     locale: 'no',
     firstDay: 1,
-    weekNumbers: true,
-    height: 'auto',
+    weekNumbers: false,
+    height: 450, // 👈 mindre kalender
+    contentHeight: 450,
+    aspectRatio: 1.2,
 
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
