@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
         const csvUrl =
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPBUWpbOokMYOE4hg8yWOCKRqrKcRYTlAQkiNEX9jj1cZh6l780N3HmYRtKYn5cDu9RMz83SvTtZvb/pub?output=csv&sheet=utleie-kalender";
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPBUWpbOokMYOE4hg8yWOCKRqrKcRYTlAQkiNEX9jj1cZh6l780N3HmYRtKYn5cDu9RMz83SvTtZvb/pub?output=csv&gid=1158072166";
 
         const res = await fetch(csvUrl);
         const csv = await res.text();
