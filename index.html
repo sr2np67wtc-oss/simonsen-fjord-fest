@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     locale: 'no',
+      firstDay: 1,
+      weekNumbers: true,
     height: 'auto',
 
     events: async function(fetchInfo, successCallback, failureCallback) {
