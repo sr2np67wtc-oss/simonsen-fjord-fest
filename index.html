@@ -154,8 +154,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         const rows = json.table.rows
           .filter(r => r.c && r.c[1] && r.c[2])
           .map(r => {
+
+            /* 🔥 FULL RENS AV TITTEL */
             const rawTitle = r.c[0]?.v || 'Opptatt';
-            const title = rawTitle.toString().replace(/^0+/, ''); // 🔥 Fjerner nuller foran teksten
+            const title = rawTitle
+              .toString()
+              .replace(/[^A-Za-zÆØÅæøå ]+/g, '')  // fjern tall og rare tegn
+              .trim();
+
             const startCell = r.c[1];
             const endCell = r.c[2];
 
@@ -188,7 +194,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return {
               title: title,
               start: start,
-              end: end + "T23:59:59",   // inkluderer sluttdagen
+              end: end + "T23:59:59",
               color: '#ff4d4d'
             };
           })
