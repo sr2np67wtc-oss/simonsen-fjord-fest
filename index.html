@@ -155,18 +155,8 @@ document.addEventListener('DOMContentLoaded', async function() {
           .filter(r => r.c && r.c[1] && r.c[2])
           .map(r => {
 
-            /* 🔥 FULL RENS AV TITTEL */
-            let rawTitle = '';
-
-            if (r.c[0]) {
-              const v = r.c[0].v ? r.c[0].v.toString() : '';
-              const f = r.c[0].f ? r.c[0].f.toString() : '';
-              rawTitle = (v + ' ' + f).trim();
-            }
-
-            const title = rawTitle
-              .replace(/[^A-Za-zÆØÅæøå ]+/g, '')  // fjern tall og rare tegn
-              .trim() || 'Opptatt';
+            /* 👇 ALLTID bruk "Opptatt" som tittel */
+            const title = "Opptatt";
 
             const startCell = r.c[1];
             const endCell = r.c[2];
