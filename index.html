@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=10">
   <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- FullCalendar -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 </head>
@@ -28,7 +27,6 @@
   </div>
 </header>
 
-<!-- ===================== PRODUKTER ===================== -->
 <section id="utleie">
   <h2>Utleieprodukter</h2>
 
@@ -57,14 +55,12 @@
   </p>
 </section>
 
-<!-- ===================== KALENDER ===================== -->
 <section id="kalender" class="calendar">
   <h2>Tilgjengelighet</h2>
   <p>Grønn = ledig • Rød = opptatt</p>
   <div id="utleieKalender"></div>
 </section>
 
-<!-- ===================== BOOKING ===================== -->
 <section id="booking" class="booking">
   <h2>Reserver utstyr</h2>
 
@@ -76,13 +72,11 @@
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
 <footer id="kontakt">
   <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
   <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
-<!-- ===================== KALENDER SCRIPT ===================== -->
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
   const calendarEl = document.getElementById('utleieKalender');
@@ -91,9 +85,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     initialView: 'dayGridMonth',
     locale: 'no',
     firstDay: 1,
-    weekNumbers: false,
-    height: 450,
-    contentHeight: 450,
+    height: 350,
+    contentHeight: 350,
     aspectRatio: 1.2,
 
     events: async function(fetchInfo, successCallback, failureCallback) {
