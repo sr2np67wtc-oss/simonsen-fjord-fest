@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const sheetId = "1rzVAQZMifXlN3CZbVh4NNXkKvAm9dM5YzoEbGhO8_6k";
-        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+const sheetId = "1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI";
+const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Utleie-kalender`;
         const response = await fetch(url);
         const text = await response.text();
         const json = JSON.parse(text.substring(47, text.length - 2));
