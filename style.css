@@ -49,23 +49,25 @@ nav a:hover {
   margin-bottom: 35px;
 }
 
-/* GRID – faste bokser, MER LUFT */
+/* GRID – fleksibelt, ingen overlapping */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
-  justify-content: center;
-  gap: 35px; /* ← MER LUFT MELLOM BOKSENE */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px; /* MER LUFT */
+  justify-items: center;
 }
 
-/* PRODUKTKORT – identisk størrelse */
+/* PRODUKTKORT – fleksibel bredde */
 .product {
   background: #fafafa;
   border-radius: 12px;
-  padding: 18px; /* litt mer luft inni boksen */
+  padding: 18px;
   box-shadow: 0 0 12px rgba(0,0,0,0.08);
   text-align: center;
-  width: 200px;
-  min-height: 270px; /* litt høyere for mer luft */
+  width: 100%;
+  max-width: 200px;   /* ← perfekt størrelse på PC */
+  min-width: 160px;   /* ← krymper på mobil */
+  min-height: 270px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -140,12 +142,13 @@ footer a {
 /* ====== MOBIL ====== */
 @media (max-width: 600px) {
   .products {
-    grid-template-columns: repeat(2, 200px);
-    gap: 25px; /* mer luft også på mobil */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
   }
 
   .product {
-    width: 200px;
+    max-width: 180px; /* litt mindre på mobil */
+    min-width: 150px;
   }
 
   #utleieKalender {
