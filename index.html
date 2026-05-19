@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           events.push({
             title: title || "Opptatt",
             start: start,
-            end: new Date(new Date(end).setDate(new Date(end).getDate() + 1)),
+            end: end + "T23:59:59",
             color: "#ff4d4d"
           });
         }
