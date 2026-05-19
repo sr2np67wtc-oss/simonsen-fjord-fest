@@ -70,6 +70,9 @@ nav a:hover {
   text-align: center; /* midtstiller alt innhold */
   max-width: 300px;
 }
+.product p {
+  text-align: center;
+}
 
 /* 🔧 FIKSET BILDESTØRRELSE */
 .product img {
