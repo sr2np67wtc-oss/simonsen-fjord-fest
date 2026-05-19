@@ -49,24 +49,23 @@ nav a:hover {
   margin-bottom: 30px;
 }
 
-/* GRID – stabil, ingen overlapping */
+/* GRID – stabil, perfekt avstand */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 200px));
+  grid-template-columns: repeat(auto-fill, 200px); /* faste kolonner */
   justify-content: center;
-  gap: 16px; /* perfekt avstand */
+  gap: 22px; /* ← perfekt mellomting */
 }
 
 /* PRODUKTKORT */
 .product {
   background: #fafafa;
   border-radius: 12px;
-  padding: 14px;
+  padding: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   text-align: center;
-  width: 100%;
-  max-width: 200px;
-  min-height: 250px;
+  width: 200px; /* fast bredde */
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -74,7 +73,7 @@ nav a:hover {
 
 .product img {
   width: 100%;
-  max-width: 140px;
+  max-width: 150px;
   height: auto;
   margin: 0 auto 10px auto;
 }
@@ -141,12 +140,13 @@ footer a {
 /* ====== MOBIL ====== */
 @media (max-width: 480px) {
   .products {
-    grid-template-columns: 1fr; /* ← EN KOLONNE PÅ MOBIL */
-    gap: 14px;
+    grid-template-columns: repeat(2, 1fr); /* to kolonner på mobil */
+    gap: 18px; /* litt mindre luft på mobil */
   }
 
   .product {
-    max-width: 260px;
+    width: 100%;
+    max-width: 180px;
     margin: auto;
   }
 }
