@@ -49,15 +49,15 @@ nav a:hover {
   margin-bottom: 30px;
 }
 
-/* ⭐ GRID – dette er layouten fra i går */
+/* ⭐ GRID – dette er layouten du likte */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px); /* faste kolonner */
-  justify-content: center;                        /* midtstiller alt */
-  gap: 16px;                                      /* perfekt mellomting */
+  justify-content: center;                        /* midtstilt */
+  gap: 14px;                                      /* perfekt avstand */
 }
 
-/* ⭐ PRODUKTKORT – samme look som i går */
+/* ⭐ PRODUKTKORT – identisk størrelse */
 .product {
   background: #fafafa;
   border-radius: 12px;
@@ -99,8 +99,8 @@ nav a:hover {
 /* ====== MOBIL ====== */
 @media (max-width: 480px) {
   .products {
-    grid-template-columns: repeat(2, 1fr); /* to kolonner på mobil */
-    gap: 14px;
+    grid-template-columns: repeat(2, 1fr); /* to kolonner */
+    gap: 12px;                             /* litt mindre gap */
   }
 
   .product {
