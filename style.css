@@ -49,13 +49,17 @@ nav a:hover {
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
+
+  /* GRID som før */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
 }
 
 .product {
   background: #fafafa;
   border-radius: 10px;
   padding: 20px;
-  margin-bottom: 25px;
   box-shadow: 0 0 8px rgba(0,0,0,0.08);
   text-align: center;
 }
@@ -128,7 +132,7 @@ footer a:hover {
     height: 45px;
   }
 
-  .product {
-    padding: 15px;
+  .products {
+    grid-template-columns: 1fr;
   }
 }
