@@ -1,197 +1,120 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- FullCalendar CSS & JS -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+  <!-- FullCalendar CSS & JS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
-    <style>
-        .calendar {
-            max-width: 420px;
-            margin: 20px auto;
-            text-align: center;
-            background-color: #fafafa;
-            padding: 12px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.08);
-        }
+  <style>
+    .calendar {
+      max-width: 420px;
+      margin: 20px auto;
+      text-align: center;
+      background-color: #fafafa;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    }
 
-        #utleieKalender {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 10px;
-        }
+    #utleieKalender {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+    }
 
-        .fc-daygrid-day {
-            background-color: #e8fbe8 !important;
-        }
+    .fc-daygrid-day {
+      background-color: #e8fbe8 !important;
+    }
 
-        .fc-event {
-            background-color: #ff4d4d !important;
-            border: none !important;
-        }
-        .fc-week-number {
-  padding-left: 6px;
-  font-weight: 500;
-  color: #777;
-}
-        .fc-week-number {
-  background-color: #f0f0f0;
-  border-radius: 4px;
-}
+    .fc-event {
+      background-color: #ff4d4d !important;
+      border: none !important;
+    }
 
-    </style>
+    /* Ryddig og balansert ukenummer-stil */
+    .fc-daygrid-week-number {
+      width: 42px !important;
+      text-align: center;
+      font-weight: 500;
+      color: #666;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+    }
+
+    /* Litt luft mellom uke og mandag */
+    .fc-daygrid-day-frame {
+      padding-left: 6px;
+    }
+
+    /* Mobiltilpasning – skjul ukenummer på små skjermer */
+    @media (max-width: 600px) {
+      .fc-daygrid-week-number {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <div class="header-container">
-        <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+  <div class="header-container">
+    <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
 
-        <nav>
-            <a href="#utleie">Utleie</a>
-            <a href="#kalender">Tilgjengelighet</a>
-            <a href="#booking">Booking</a>
-            <a href="vilkar.html">Avtalevilkår</a>
-            <a href="#kontakt">Kontakt</a>
-        </nav>
-    </div>
+    <nav>
+      <a href="#utleie">Utleie</a>
+      <a href="#kalender">Tilgjengelighet</a>
+      <a href="#booking">Booking</a>
+      <a href="vilkar.html">Avtalevilkår</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
 </header>
 
 <section id="utleie" class="products">
-    <h2>Utleieprodukter</h2>
+  <h2>Utleieprodukter</h2>
 
-    <div class="product">
-        <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680" 
-             alt="JBL Partyhøyttaler">
-        <h3>JBL Partyhøyttaler</h3>
-        <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
-        <p class="price">500 kr / Helg (3 dager)</p>
-        <p class="price">800 kr / Uke (7 dager)</p>
-    </div>
+  <div class="product">
+    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680" 
+         alt="JBL Partyhøyttaler">
+    <h3>JBL Partyhøyttaler</h3>
+    <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
+    <p class="price">500 kr / Helg (3 dager)</p>
+    <p class="price">800 kr / Uke (7 dager)</p>
+  </div>
 
-    <div class="product">
-        <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605" 
-             alt="Trådløs mikrofon">
-        <h3>Trådløs Mikrofon</h3>
-        <p>Perfekt til taler, karaoke og arrangementer.</p>
-        <p class="price">100 kr / Helg (3 dager)</p>
-        <p class="price">150 kr / Uke (7 dager)</p>
-    </div>
+  <div class="product">
+    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605" 
+         alt="Trådløs mikrofon">
+    <h3>Trådløs Mikrofon</h3>
+    <p>Perfekt til taler, karaoke og arrangementer.</p>
+    <p class="price">100 kr / Helg (3 dager)</p>
+    <p class="price">150 kr / Uke (7 dager)</p>
+  </div>
 
-    <p class="delivery-summary">
-        🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.
-    </p>
+  <p class="delivery-summary">
+    🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.
+  </p>
 </section>
 
 <section id="kalender" class="calendar">
-    <h2>Tilgjengelighet</h2>
-    <p>Grønn = ledig • Rød = opptatt</p>
-    <div id="utleieKalender"></div>
+  <h2>Tilgjengelighet</h2>
+  <p>Grønn = ledig • Rød = opptatt</p>
+  <div id="utleieKalender"></div>
 </section>
 
 <section id="booking" class="booking">
-    <h2>Reserver utstyr</h2>
-    <p>Fyll ut skjemaet under for å sende inn en forespørsel.</p>
+  <h2>Reserver utstyr</h2>
+  <p>Fyll ut skjemaet under for å sende inn en forespørsel.</p>
 
-    <div class="form-container">
-        <iframe 
-            src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
-            width="100%" 
-            height="900" 
-            frameborder="0">
-        </iframe>
-    </div>
-</section>
-
-<footer id="kontakt">
-    <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
-    <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
-</footer>
-
-<!-- FULLCALENDAR SCRIPT -->
-<script>
-document.addEventListener('DOMContentLoaded', async function() {
-  var calendarEl = document.getElementById('utleieKalender');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'no',
-      firstDay: 1,
-      weekNumbers: true,
-    height: 'auto',
-
-    events: async function(fetchInfo, successCallback, failureCallback) {
-      try {
-const sheetId = "1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI";
-const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Utleie-kalender`;
-        const response = await fetch(url);
-        const text = await response.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
-
-        const rows = json.table.rows
-          .filter(r => r.c && r.c[1] && r.c[2])
-          .map(r => {
-            const title = r.c[0]?.v || 'Opptatt';
-            const startCell = r.c[1];
-            const endCell = r.c[2];
-
-            const parseDate = (cell) => {
-              if (!cell) return null;
-
-              // 1. Google sender "Date(2026,4,24)" som tekst
-              if (typeof cell.v === 'string' && cell.v.startsWith("Date(")) {
-                const parts = cell.v.replace("Date(", "").replace(")", "").split(",");
-                const y = parts[0];
-                const m = String(Number(parts[1]) + 1).padStart(2, '0');
-                const d = String(parts[2]).padStart(2, '0');
-                return `${y}-${m}-${d}`;
-              }
-
-              // 2. Formatert tekst "24.05.2026"
-              if (cell.f && typeof cell.f === 'string') {
-                const [day, month, year] = cell.f.split('.');
-                return `${year}-${month}-${day}`;
-              }
-
-              // 3. ISO-streng
-              if (typeof cell.v === 'string' && cell.v.includes('-')) {
-                return cell.v;
-              }
-
-              return null;
-            };
-
-            const start = parseDate(startCell);
-            const end = parseDate(endCell);
-
-            return {
-              title: title,
-              start: start,
-              end: end,
-              color: '#ff4d4d'
-            };
-          })
-          .filter(e => e.start && e.end);
-
-        successCallback(rows);
-      } catch (error) {
-        console.error('Feil ved henting av Google Sheet:', error);
-        failureCallback(error);
-      }
-    }
-  });
-
-  calendar.render();
-});
-</script>
-
-</body>
-</html>
+  <div class="form-container">
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
+      width="100%" 
+      height
