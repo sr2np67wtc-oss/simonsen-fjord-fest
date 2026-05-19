@@ -117,4 +117,91 @@
     <iframe 
       src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
       width="100%" 
-      height
+      height="900" 
+      frameborder="0">
+    </iframe>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
+  <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
+</footer>
+
+<!-- FULLCALENDAR SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  var calendarEl = document.getElementById('utleieKalender');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'no',
+    firstDay: 1,
+    weekNumbers: true,
+    height: 'auto',
+
+    events: async function(fetchInfo, successCallback, failureCallback) {
+      try {
+        const sheetId = "1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Utleie-kalender`;
+
+        const response = await fetch(url);
+        const text = await response.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+
+        const rows = json.table.rows
+          .filter(r => r.c && r.c[1] && r.c[2])
+          .map(r => {
+            const title = r.c[0]?.v || 'Opptatt';
+            const startCell = r.c[1];
+            const endCell = r.c[2];
+
+            const parseDate = (cell) => {
+              if (!cell) return null;
+
+              if (typeof cell.v === 'string' && cell.v.startsWith("Date(")) {
+                const parts = cell.v.replace("Date(", "").replace(")", "").split(",");
+                const y = parts[0];
+                const m = String(Number(parts[1]) + 1).padStart(2, '0');
+                const d = String(parts[2]).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+              }
+
+              if (cell.f && typeof cell.f === 'string') {
+                const [day, month, year] = cell.f.split('.');
+                return `${year}-${month}-${day}`;
+              }
+
+              if (typeof cell.v === 'string' && cell.v.includes('-')) {
+                return cell.v;
+              }
+
+              return null;
+            };
+
+            const start = parseDate(startCell);
+            const end = parseDate(endCell);
+
+            return {
+              title: title,
+              start: start,
+              end: end,
+              color: '#ff4d4d'
+            };
+          })
+          .filter(e => e.start && e.end);
+
+        successCallback(rows);
+      } catch (error) {
+        console.error('Feil ved henting av Google Sheet:', error);
+        failureCallback(error);
+      }
+    }
+  });
+
+  calendar.render();
+});
+</script>
+
+</body>
+</html>
