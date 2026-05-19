@@ -7,11 +7,13 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- FullCalendar CSS & JS -->
+  <!-- FullCalendar -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
   <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+
     .calendar {
       max-width: 520px;
       margin: 30px auto;
@@ -36,30 +38,6 @@
       background-color: #ff4d4d !important;
       border: none !important;
     }
-
-    .fc-daygrid-week-number {
-      width: 46px !important;
-      text-align: center;
-      font-weight: 500;
-      font-size: 0.85em;
-      color: #555;
-      background-color: #f0f0f0;
-      border-radius: 4px;
-    }
-
-    .fc-daygrid-day-frame {
-      padding-left: 8px;
-    }
-
-    @media (max-width: 600px) {
-      .fc-daygrid-week-number {
-        display: none;
-      }
-      .calendar {
-        max-width: 100%;
-        padding: 8px;
-      }
-    }
   </style>
 </head>
 
@@ -79,32 +57,6 @@
   </div>
 </header>
 
-<section id="utleie" class="products">
-  <h2>Utleieprodukter</h2>
-
-  <div class="product">
-    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680" 
-         alt="JBL Partyhøyttaler">
-    <h3>JBL Partyhøyttaler</h3>
-    <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
-    <p class="price">500 kr / Helg (3 dager)</p>
-    <p class="price">800 kr / Uke (7 dager)</p>
-  </div>
-
-  <div class="product">
-    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605" 
-         alt="Trådløs mikrofon">
-    <h3>Trådløs Mikrofon</h3>
-    <p>Perfekt til taler, karaoke og arrangementer.</p>
-    <p class="price">100 kr / Helg (3 dager)</p>
-    <p class="price">150 kr / Uke (7 dager)</p>
-  </div>
-
-  <p class="delivery-summary">
-    🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.
-  </p>
-</section>
-
 <section id="kalender" class="calendar">
   <h2>Tilgjengelighet</h2>
   <p>Grønn = ledig • Rød = opptatt</p>
@@ -113,14 +65,11 @@
 
 <section id="booking" class="booking">
   <h2>Reserver utstyr</h2>
-  <p>Fyll ut skjemaet under for å sende inn en forespørsel.</p>
 
   <div class="form-container">
     <iframe 
       src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
-      width="100%" 
-      height="900" 
-      frameborder="0">
+      width="100%" height="900" frameborder="0">
     </iframe>
   </div>
 </section>
@@ -130,12 +79,11 @@
   <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
-<!-- FULLCALENDAR SCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
-  var calendarEl = document.getElementById('utleieKalender');
+  const calendarEl = document.getElementById('utleieKalender');
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+  const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     locale: 'no',
     firstDay: 1,
@@ -144,62 +92,52 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const sheetId = "1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI";
-        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Utleie-kalender`;
+        // Direkte CSV-eksport fra dokumentet "Database Nettside", fanen med gid=1158072166
+        const csvUrl =
+          "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
 
-        const response = await fetch(url);
-        const text = await response.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
+        const res = await fetch(csvUrl);
+        const csv = await res.text();
+        const rows = csv.split("\n").map(r => r.split(","));
 
-        const rows = json.table.rows
-          .filter(r => r.c && r.c[1] && r.c[2])
-          .map(r => {
+        let events = [];
 
-            /* 👇 ALLTID bruk "Opptatt" som tittel */
-            const title = "Opptatt";
+        function convertDate(d) {
+          if (!d) return null;
+          const parts = d.trim().replace(/\r/g, "").split(".");
+          if (parts.length !== 3) return null;
+          const day = parts[0].padStart(2, "0");
+          const month = parts[1].padStart(2, "0");
+          const year = parts[2];
+          return `${year}-${month}-${day}`;
+        }
 
-            const startCell = r.c[1];
-            const endCell = r.c[2];
+        // Forventer: rad 0 = Title | Start | End
+        for (let i = 1; i < rows.length; i++) {
+          const title = (rows[i][0] || "").trim();
+          const startRaw = (rows[i][1] || "").trim();
+          const endRaw   = (rows[i][2] || "").trim();
 
-            const parseDate = (cell) => {
-              if (!cell) return null;
+          if (!startRaw) continue;
 
-              if (typeof cell.v === 'string' && cell.v.startsWith("Date(")) {
-                const parts = cell.v.replace("Date(", "").replace(")", "").split(",");
-                const y = parts[0];
-                const m = String(Number(parts[1]) + 1).padStart(2, '0');
-                const d = String(parts[2]).padStart(2, '0');
-                return `${y}-${m}-${d}`;
-              }
+          const start = convertDate(startRaw);
+          const end   = convertDate(endRaw || startRaw);
 
-              if (cell.f && typeof cell.f === 'string') {
-                const [day, month, year] = cell.f.split('.');
-                return `${year}-${month}-${day}`;
-              }
+          if (!start) continue;
 
-              if (typeof cell.v === 'string' && cell.v.includes('-')) {
-                return cell.v;
-              }
+          events.push({
+            title: title || "Opptatt",
+            start: start,
+            end: end + "T23:59:59",
+            color: "#ff4d4d"
+          });
+        }
 
-              return null;
-            };
+        successCallback(events);
 
-            const start = parseDate(startCell);
-            const end = parseDate(endCell);
-
-            return {
-              title: title,
-              start: start,
-              end: end + "T23:59:59",
-              color: '#ff4d4d'
-            };
-          })
-          .filter(e => e.start && e.end);
-
-        successCallback(rows);
-      } catch (error) {
-        console.error('Feil ved henting av Google Sheet:', error);
-        failureCallback(error);
+      } catch (err) {
+        console.error("Feil ved henting av CSV:", err);
+        failureCallback(err);
       }
     }
   });
