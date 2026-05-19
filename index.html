@@ -10,35 +10,6 @@
   <!-- FullCalendar -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-
-    .calendar {
-      max-width: 520px;
-      margin: 30px auto;
-      text-align: center;
-      background-color: #fafafa;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.08);
-    }
-
-    #utleieKalender {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .fc-daygrid-day {
-      background-color: #e8fbe8 !important;
-    }
-
-    .fc-event {
-      background-color: #ff4d4d !important;
-      border: none !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -57,12 +28,39 @@
   </div>
 </header>
 
+<!-- ===================== PRODUKTER ===================== -->
+<section id="utleie" class="products">
+  <h2>Utleieprodukter</h2>
+
+  <div class="product">
+    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680">
+    <h3>JBL PartyBox 320</h3>
+    <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
+    <p class="price">500 kr / Helg (3 dager)</p>
+    <p class="price">800 kr / Uke (7 dager)</p>
+  </div>
+
+  <div class="product">
+    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605">
+    <h3>Trådløs Mikrofon</h3>
+    <p>Perfekt til taler, karaoke og arrangementer. 2 stk</p>
+    <p class="price">100 kr / Helg (3 dager)</p>
+    <p class="price">150 kr / Uke (7 dager)</p>
+  </div>
+
+  <p class="delivery-summary">
+    🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.
+  </p>
+</section>
+
+<!-- ===================== KALENDER ===================== -->
 <section id="kalender" class="calendar">
   <h2>Tilgjengelighet</h2>
   <p>Grønn = ledig • Rød = opptatt</p>
   <div id="utleieKalender"></div>
 </section>
 
+<!-- ===================== BOOKING ===================== -->
 <section id="booking" class="booking">
   <h2>Reserver utstyr</h2>
 
@@ -74,11 +72,13 @@
   </div>
 </section>
 
+<!-- ===================== FOOTER ===================== -->
 <footer id="kontakt">
   <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
   <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
+<!-- ===================== KALENDER SCRIPT ===================== -->
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
   const calendarEl = document.getElementById('utleieKalender');
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        // Direkte CSV-eksport fra dokumentet "Database Nettside", fanen med gid=1158072166
+        // Direkte CSV fra arket ditt
         const csvUrl =
           "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
 
@@ -106,13 +106,9 @@ document.addEventListener('DOMContentLoaded', async function() {
           if (!d) return null;
           const parts = d.trim().replace(/\r/g, "").split(".");
           if (parts.length !== 3) return null;
-          const day = parts[0].padStart(2, "0");
-          const month = parts[1].padStart(2, "0");
-          const year = parts[2];
-          return `${year}-${month}-${day}`;
+          return `${parts[2]}-${parts[1].padStart(2,"0")}-${parts[0].padStart(2,"0")}`;
         }
 
-        // Forventer: rad 0 = Title | Start | End
         for (let i = 1; i < rows.length; i++) {
           const title = (rows[i][0] || "").trim();
           const startRaw = (rows[i][1] || "").trim();
