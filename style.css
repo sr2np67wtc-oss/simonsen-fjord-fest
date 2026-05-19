@@ -49,12 +49,12 @@ nav a:hover {
   margin-bottom: 30px;
 }
 
-/* GRID – faste bokser, perfekt lik størrelse */
+/* GRID – faste bokser, mer luft */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
   justify-content: center;
-  gap: 20px;
+  gap: 25px; /* ← MER LUFT MELLOM BOKSENE */
 }
 
 /* PRODUKTKORT – identisk størrelse */
@@ -64,9 +64,8 @@ nav a:hover {
   padding: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   text-align: center;
-  width: 200px;       /* ← FAST bredde */
-  height: auto;
-  min-height: 260px;  /* ← Sikrer lik høyde */
+  width: 200px;       /* fast bredde */
+  min-height: 260px;  /* lik høyde */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -142,7 +141,7 @@ footer a {
 @media (max-width: 600px) {
   .products {
     grid-template-columns: repeat(2, 200px);
-    gap: 15px;
+    gap: 20px; /* litt mindre luft på mobil */
   }
 
   .product {
