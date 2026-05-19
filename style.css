@@ -24,11 +24,12 @@ header {
 }
 
 .logo {
-  width: 110px;   /* normal, ikke gigantisk */
+  width: 110px;
   height: auto;
   display: block;
 }
 
+/* ====== NAV ====== */
 nav a {
   margin-left: 20px;
   text-decoration: none;
@@ -53,15 +54,13 @@ nav a:hover {
   margin-bottom: 24px;
 }
 
-/* GRID: luft mellom kortene, midtstilt */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;              /* tydelig mellomrom mellom boksene */
-  justify-items: center;  /* boksene står pent midtstilt */
+  gap: 20px;
+  justify-items: center;
 }
 
-/* PRODUKTKORT */
 .product {
   background: #fafafa;
   border-radius: 12px;
@@ -69,36 +68,21 @@ nav a:hover {
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   text-align: center;
   width: 100%;
-  max-width: 240px;       /* fast maks-bredde, gir pen kolonnebredde */
+  max-width: 240px;
   min-height: 260px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 .product img {
   width: 100%;
   max-width: 160px;
-  height: auto;
-  margin: 0 auto 10px auto;
-}
-
-.product h3 {
-  font-size: 17px;
-  margin: 8px 0;
+  margin-bottom: 10px;
 }
 
 .price {
   font-weight: bold;
   font-size: 14px;
-  margin: 3px 0;
-}
-
-.delivery-summary {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-size: 14px;
-  margin-top: 12px;
 }
 
 /* ====== KALENDER ====== */
@@ -109,21 +93,9 @@ nav a:hover {
   text-align: center;
 }
 
-.calendar h2 {
-  margin-bottom: 8px;
-}
-
-.calendar p {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-/* litt mindre enn full størrelse, men tydelig */
 #utleieKalender {
-  transform: scale(0.8);
+  transform: scale(0.85);
   transform-origin: top center;
-  margin: 0 auto;
 }
 
 /* ====== BOOKING ====== */
@@ -131,11 +103,6 @@ nav a:hover {
   max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
-}
-
-.booking h2 {
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .form-container {
@@ -154,24 +121,13 @@ footer {
 
 footer a {
   color: #66aaff;
-  text-decoration: none;
 }
 
 /* ====== MOBIL ====== */
 @media (max-width: 600px) {
-  .header-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  nav a {
-    margin-left: 10px;
-    font-size: 13px;
-  }
-
   .products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;          /* litt tettere på mobil */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
   .product {
