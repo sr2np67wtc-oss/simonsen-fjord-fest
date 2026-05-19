@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=20">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- FullCalendar -->
@@ -86,9 +86,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     initialView: 'dayGridMonth',
     locale: 'no',
     firstDay: 1,
+
+    // gjør kalenderen mindre og slankere
     height: "auto",
     contentHeight: "auto",
-    aspectRatio: 1.1, // gjør kalenderen smalere og mer proporsjonert
+    aspectRatio: 1.6,
 
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
