@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=32">
+  <link rel="stylesheet" href="style.css?v=25">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- FullCalendar -->
@@ -127,16 +127,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
           if (!start) continue;
 
-          // 🔥 FIKS: legg til 1 dag for å inkludere hele sluttdagen
-          const endInclusive = end
-            ? new Date(new Date(end).setDate(new Date(end).getDate() + 1))
-            : null;
-
+          // ✔ DENNE VAR DEN SOM FUNKET
           events.push({
             title: title || "Opptatt",
             start: start,
-            end: endInclusive,
-            display: "block",
+            end: end + "T23:59:59",
             color: "#ff4d4d"
           });
         }
