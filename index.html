@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-    <link rel="stylesheet" href="style.css?v=102">
+    <link rel="stylesheet" href="style.css?v=103">
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- FullCalendar -->
@@ -20,6 +20,7 @@
             <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
             <nav>
                 <a href="#utleie">Utleie</a>
+                <a href="#slik">Slik fungerer det</a>
                 <a href="#kalender">Tilgjengelighet</a>
                 <a href="#booking">Booking</a>
                 <a href="vilkar.html">Avtalevilkår</a>
@@ -53,6 +54,28 @@
             <p class="delivery-summary">🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.</p>
         </section>
 
+        <section id="slik" class="slik">
+            <h2>Slik fungerer det</h2>
+            <p class="slik-ingress">Enkelt og ukomplicert frå start til slutt</p>
+            <div class="slik-grid">
+                <div class="slik-steg">
+                    <div class="slik-ikon">📅</div>
+                    <h3>1. Book</h3>
+                    <p>Fyll ut bookingskjemaet med ønsket dato og utstyr. Du hører fra oss innen kort tid for bekreftelse.</p>
+                </div>
+                <div class="slik-steg">
+                    <div class="slik-ikon">🚚</div>
+                    <h3>2. Vi leverer</h3>
+                    <p>Vi kjører utstyret til deg i Stavanger-området. Alt er klart til bruk når vi ankommer.</p>
+                </div>
+                <div class="slik-steg">
+                    <div class="slik-ikon">🎉</div>
+                    <h3>3. Nyt festen</h3>
+                    <p>Sett på musikken og nyt arrangementet! Etter leieperioden henter vi utstyret igjen.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="anmeldelser" class="anmeldelser">
             <h2>Hva kundene sier</h2>
             <div class="anmeldelser-grid">
@@ -68,7 +91,7 @@
                 </div>
                 <div class="anmeldelse">
                     <div class="stjerner">★★★★★</div>
-                    <p class="sitat">"Brukte JBL-en på bursdag. Super lydkvalitet og enkel å bruke!"</p>
+                    <p class="sitat">"Brukte JBL-en på bursdag og alle spurte hvor vi hadde fått tak i den. Super lydkvalitet og enkel å bruke!"</p>
                     <p class="kunde">— Line K., Stavanger</p>
                 </div>
             </div>
@@ -87,6 +110,48 @@
                     width="100%" height="900" frameborder="0"></iframe>
             </div>
         </section>
+
+        <section id="faq" class="faq">
+            <h2>Vanlige spørsmål</h2>
+            <p class="faq-ingress">Finner du ikke svaret du leter etter? Ta kontakt med oss direkte.</p>
+            <div class="faq-liste">
+                <div class="faq-item">
+                    <button class="faq-knapp" onclick="toggleFaq(this)">
+                        <span>Hva skjer om noe blir skadet?</span>
+                        <span class="faq-ikon">+</span>
+                    </button>
+                    <p class="faq-svar">Vi ber deg behandle utstyret varsomt. Skulle noe bli skadet under leieperioden, avtaler vi erstatning basert på skadeomfanget. Ta kontakt med oss så fort som mulig om noe skjer.</p>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-knapp" onclick="toggleFaq(this)">
+                        <span>Hvor langt kjører dere?</span>
+                        <span class="faq-ikon">+</span>
+                    </button>
+                    <p class="faq-svar">Vi leverer og henter innenfor Stavanger-området uten ekstra kostnad. For leveringer utenfor dette området tar vi kontakt for å avtale pris.</p>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-knapp" onclick="toggleFaq(this)">
+                        <span>Hvor lang tid i forveien må jeg bestille?</span>
+                        <span class="faq-ikon">+</span>
+                    </button>
+                    <p class="faq-svar">Vi anbefaler å booke minst 3–5 dager i forveien for å sikre tilgjengelighet. Sjekk kalenderen for ledige datoer.</p>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-knapp" onclick="toggleFaq(this)">
+                        <span>Trenger jeg å betale depositum?</span>
+                        <span class="faq-ikon">+</span>
+                    </button>
+                    <p class="faq-svar">Vi krever ikke depositum, men ber om bekreftelse av bestillingen via bookingskjemaet. Betaling skjer ved levering.</p>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-knapp" onclick="toggleFaq(this)">
+                        <span>Kan jeg leie utstyret lenger enn en uke?</span>
+                        <span class="faq-ikon">+</span>
+                    </button>
+                    <p class="faq-svar">Ja, det er mulig å avtale lengre leieperioder. Ta kontakt med oss direkte for pris og tilgjengelighet.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer id="kontakt">
@@ -98,6 +163,13 @@
     <script>
         function scrollToBooking() {
             document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function toggleFaq(knapp) {
+            const item = knapp.parentElement;
+            const erAapen = item.classList.contains("aapen");
+            document.querySelectorAll(".faq-item.aapen").forEach(i => i.classList.remove("aapen"));
+            if (!erAapen) item.classList.add("aapen");
         }
 
         document.addEventListener('DOMContentLoaded', async function () {
