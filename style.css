@@ -146,6 +146,21 @@ nav a:hover {
     .booking {
   text-align: center;
 }
+  /* ====== BOOKING-SEKSJON ====== */
+.booking {
+  max-width: 900px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+  text-align: center; /* ← midtstiller overskrift og innhold */
+}
+
+/* Midtstill Google Forms-skjemaet */
+.form-container iframe {
+  display: block;
+  margin: 0 auto; /* ← midtstiller selve skjemaet */
+  border: none;
+}
+
 
 .form-container iframe {
   display: block;
