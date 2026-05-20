@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-    <link rel="stylesheet" href="style.css?v=103">
+    <link rel="stylesheet" href="style.css?v=104">
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- FullCalendar -->
@@ -30,120 +30,130 @@
     </header>
 
     <main>
-        <section id="utleie">
-            <h2>Utleieprodukter</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680" alt="JBL PartyBox 320">
-                    <h3>JBL PartyBox 320</h3>
-                    <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
-                    <p class="price">500 kr / Helg (3 dager)</p>
-                    <p class="price">800 kr / Uke (7 dager)</p>
-                    <a href="booking.html" class="bestill-btn">Bestill</a>
-                </div>
 
-                <div class="product">
-                    <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605" alt="Trådløse mikrofoner">
-                    <h3>Trådløse Mikrofoner (2 stk)</h3>
-                    <p>Perfekt til taler, karaoke og arrangementer.</p>
-                    <p class="price">100 kr / Helg (3 dager)</p>
-                    <p class="price">150 kr / Uke (7 dager)</p>
-                    <a href="booking.html" class="bestill-btn">Bestill</a>
+        <!-- RAD 1: Produkter + Kalender side om side -->
+        <div class="rad topp-rad">
+            <section id="utleie">
+                <h2>Utleieprodukter</h2>
+                <div class="products">
+                    <div class="product">
+                        <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc48660df/JBL_PARTYBOX_STAGE_320_HERO_2_47988_x3.png?sw=680&sh=680" alt="JBL PartyBox 320">
+                        <h3>JBL PartyBox 320</h3>
+                        <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
+                        <p class="price">500 kr / Helg (3 dager)</p>
+                        <p class="price">800 kr / Uke (7 dager)</p>
+                        <a href="booking.html" class="bestill-btn">Bestill</a>
+                    </div>
+                    <div class="product">
+                        <img src="https://no.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwb4c79b6f/JBL_PARTYBOX_WIRELESS_MIC_HERO_V1_48627_x1.png?sw=1605&sh=1605" alt="Trådløse mikrofoner">
+                        <h3>Trådløse Mikrofoner (2 stk)</h3>
+                        <p>Perfekt til taler, karaoke og arrangementer.</p>
+                        <p class="price">100 kr / Helg (3 dager)</p>
+                        <p class="price">150 kr / Uke (7 dager)</p>
+                        <a href="booking.html" class="bestill-btn">Bestill</a>
+                    </div>
                 </div>
-            </div>
-            <p class="delivery-summary">🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.</p>
-        </section>
+                <p class="delivery-summary">🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.</p>
+            </section>
 
-        <section id="slik" class="slik">
-            <h2>Slik fungerer det</h2>
-            <p class="slik-ingress">Enkelt og ukomplicert frå start til slutt</p>
-            <div class="slik-grid">
-                <div class="slik-steg">
-                    <div class="slik-ikon">📅</div>
-                    <h3>1. Book</h3>
-                    <p>Fyll ut bookingskjemaet med ønsket dato og utstyr. Du hører fra oss innen kort tid for bekreftelse.</p>
-                </div>
-                <div class="slik-steg">
-                    <div class="slik-ikon">🚚</div>
-                    <h3>2. Vi leverer</h3>
-                    <p>Vi kjører utstyret til deg i Stavanger-området. Alt er klart til bruk når vi ankommer.</p>
-                </div>
-                <div class="slik-steg">
-                    <div class="slik-ikon">🎉</div>
-                    <h3>3. Nyt festen</h3>
-                    <p>Sett på musikken og nyt arrangementet! Etter leieperioden henter vi utstyret igjen.</p>
-                </div>
-            </div>
-        </section>
+            <section id="kalender" class="calendar">
+                <h2>Tilgjengelighet</h2>
+                <p>Grønn = ledig • Rød = opptatt</p>
+                <div id="utleieKalender"></div>
+            </section>
+        </div>
 
-        <section id="anmeldelser" class="anmeldelser">
-            <h2>Hva kundene sier</h2>
-            <div class="anmeldelser-grid">
-                <div class="anmeldelse">
-                    <div class="stjerner">★★★★★</div>
-                    <p class="sitat">"Utrolig enkelt å bestille, og høyttaleren var akkurat det vi trengte til hagefesten. Anbefales på det varmeste!"</p>
-                    <p class="kunde">— Maria S., Stavanger</p>
+        <!-- RAD 2: Slik fungerer det (full bredde) -->
+        <div class="rad">
+            <section id="slik" class="slik full">
+                <h2>Slik fungerer det</h2>
+                <p class="slik-ingress">Enkelt og ukomplicert frå start til slutt</p>
+                <div class="slik-grid">
+                    <div class="slik-steg">
+                        <div class="slik-ikon">📅</div>
+                        <h3>1. Book</h3>
+                        <p>Fyll ut bookingskjemaet med ønsket dato og utstyr. Du hører fra oss innen kort tid for bekreftelse.</p>
+                    </div>
+                    <div class="slik-steg">
+                        <div class="slik-ikon">🚚</div>
+                        <h3>2. Vi leverer</h3>
+                        <p>Vi kjører utstyret til deg i Stavanger-området. Alt er klart til bruk når vi ankommer.</p>
+                    </div>
+                    <div class="slik-steg">
+                        <div class="slik-ikon">🎉</div>
+                        <h3>3. Nyt festen</h3>
+                        <p>Sett på musikken og nyt arrangementet! Etter leieperioden henter vi utstyret igjen.</p>
+                    </div>
                 </div>
-                <div class="anmeldelse">
-                    <div class="stjerner">★★★★★</div>
-                    <p class="sitat">"Rask levering, godt utstyr og hyggelig service. Mikrofonene fungerte perfekt til konfirmasjonstalen."</p>
-                    <p class="kunde">— Thomas H., Sandnes</p>
-                </div>
-                <div class="anmeldelse">
-                    <div class="stjerner">★★★★★</div>
-                    <p class="sitat">"Brukte JBL-en på bursdag og alle spurte hvor vi hadde fått tak i den. Super lydkvalitet og enkel å bruke!"</p>
-                    <p class="kunde">— Line K., Stavanger</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <section id="kalender" class="calendar">
-            <h2>Tilgjengelighet</h2>
-            <p>Grønn = ledig • Rød = opptatt</p>
-            <div id="utleieKalender"></div>
-        </section>
+        <!-- RAD 3: Anmeldelser + FAQ side om side -->
+        <div class="rad bunn-rad">
+            <section id="anmeldelser" class="anmeldelser">
+                <h2>Hva kundene sier</h2>
+                <div class="anmeldelser-kolonne">
+                    <div class="anmeldelse">
+                        <div class="stjerner">★★★★★</div>
+                        <p class="sitat">"Utrolig enkelt å bestille, og høyttaleren var akkurat det vi trengte til hagefesten. Anbefales på det varmeste!"</p>
+                        <p class="kunde">— Maria S., Stavanger</p>
+                    </div>
+                    <div class="anmeldelse">
+                        <div class="stjerner">★★★★★</div>
+                        <p class="sitat">"Rask levering, godt utstyr og hyggelig service. Mikrofonene fungerte perfekt til konfirmasjonstalen."</p>
+                        <p class="kunde">— Thomas H., Sandnes</p>
+                    </div>
+                    <div class="anmeldelse">
+                        <div class="stjerner">★★★★★</div>
+                        <p class="sitat">"Brukte JBL-en på bursdag. Super lydkvalitet og enkel å bruke!"</p>
+                        <p class="kunde">— Line K., Stavanger</p>
+                    </div>
+                </div>
+            </section>
 
-        <section id="faq" class="faq">
-            <h2>Vanlige spørsmål</h2>
-            <p class="faq-ingress">Finner du ikke svaret du leter etter? Ta kontakt med oss direkte.</p>
-            <div class="faq-liste">
-                <div class="faq-item">
-                    <button class="faq-knapp" onclick="toggleFaq(this)">
-                        <span>Hva skjer om noe blir skadet?</span>
-                        <span class="faq-ikon">+</span>
-                    </button>
-                    <p class="faq-svar">Vi ber deg behandle utstyret varsomt. Skulle noe bli skadet under leieperioden, avtaler vi erstatning basert på skadeomfanget. Ta kontakt med oss så fort som mulig om noe skjer.</p>
+            <section id="faq" class="faq">
+                <h2>Vanlige spørsmål</h2>
+                <p class="faq-ingress">Finner du ikke svaret? Ta kontakt direkte.</p>
+                <div class="faq-liste">
+                    <div class="faq-item">
+                        <button class="faq-knapp" onclick="toggleFaq(this)">
+                            <span>Hva skjer om noe blir skadet?</span>
+                            <span class="faq-ikon">+</span>
+                        </button>
+                        <p class="faq-svar">Vi ber deg behandle utstyret varsomt. Skulle noe bli skadet under leieperioden, avtaler vi erstatning basert på skadeomfanget. Ta kontakt med oss så fort som mulig om noe skjer.</p>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-knapp" onclick="toggleFaq(this)">
+                            <span>Hvor langt kjører dere?</span>
+                            <span class="faq-ikon">+</span>
+                        </button>
+                        <p class="faq-svar">Vi leverer og henter innenfor Stavanger-området uten ekstra kostnad. For leveringer utenfor dette området tar vi kontakt for å avtale pris.</p>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-knapp" onclick="toggleFaq(this)">
+                            <span>Hvor lang tid i forveien må jeg bestille?</span>
+                            <span class="faq-ikon">+</span>
+                        </button>
+                        <p class="faq-svar">Vi anbefaler å booke minst 3–5 dager i forveien for å sikre tilgjengelighet. Sjekk kalenderen for ledige datoer.</p>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-knapp" onclick="toggleFaq(this)">
+                            <span>Trenger jeg å betale depositum?</span>
+                            <span class="faq-ikon">+</span>
+                        </button>
+                        <p class="faq-svar">Vi krever ikke depositum, men ber om bekreftelse av bestillingen via bookingskjemaet. Betaling skjer ved levering.</p>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-knapp" onclick="toggleFaq(this)">
+                            <span>Kan jeg leie utstyret lenger enn en uke?</span>
+                            <span class="faq-ikon">+</span>
+                        </button>
+                        <p class="faq-svar">Ja, det er mulig å avtale lengre leieperioder. Ta kontakt med oss direkte for pris og tilgjengelighet.</p>
+                    </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-knapp" onclick="toggleFaq(this)">
-                        <span>Hvor langt kjører dere?</span>
-                        <span class="faq-ikon">+</span>
-                    </button>
-                    <p class="faq-svar">Vi leverer og henter innenfor Stavanger-området uten ekstra kostnad. For leveringer utenfor dette området tar vi kontakt for å avtale pris.</p>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-knapp" onclick="toggleFaq(this)">
-                        <span>Hvor lang tid i forveien må jeg bestille?</span>
-                        <span class="faq-ikon">+</span>
-                    </button>
-                    <p class="faq-svar">Vi anbefaler å booke minst 3–5 dager i forveien for å sikre tilgjengelighet. Sjekk kalenderen for ledige datoer.</p>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-knapp" onclick="toggleFaq(this)">
-                        <span>Trenger jeg å betale depositum?</span>
-                        <span class="faq-ikon">+</span>
-                    </button>
-                    <p class="faq-svar">Vi krever ikke depositum, men ber om bekreftelse av bestillingen via bookingskjemaet. Betaling skjer ved levering.</p>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-knapp" onclick="toggleFaq(this)">
-                        <span>Kan jeg leie utstyret lenger enn en uke?</span>
-                        <span class="faq-ikon">+</span>
-                    </button>
-                    <p class="faq-svar">Ja, det er mulig å avtale lengre leieperioder. Ta kontakt med oss direkte for pris og tilgjengelighet.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
     </main>
 
     <footer id="kontakt">
@@ -162,14 +172,13 @@
 
         document.addEventListener('DOMContentLoaded', async function () {
             const calendarEl = document.getElementById('utleieKalender');
-
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'no',
                 firstDay: 1,
                 height: "auto",
                 contentHeight: "auto",
-                aspectRatio: 1.6,
+                aspectRatio: 1.35,
                 events: async function (fetchInfo, successCallback, failureCallback) {
                     try {
                         const csvUrl = "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
@@ -189,14 +198,10 @@
                             const title = (rows[i][0] || "").trim();
                             const startRaw = (rows[i][1] || "").trim();
                             const endRaw = (rows[i][2] || "").trim();
-
                             if (!startRaw) continue;
-
                             const start = convertDate(startRaw);
                             const end = convertDate(endRaw || startRaw);
-
                             if (!start) continue;
-
                             events.push({
                                 title: title || "Opptatt",
                                 start: start,
@@ -204,16 +209,13 @@
                                 color: "#ff4d4d"
                             });
                         }
-
                         successCallback(events);
-
                     } catch (err) {
                         console.error("Feil ved henting av CSV:", err);
                         failureCallback(err);
                     }
                 }
             });
-
             calendar.render();
         });
     </script>
