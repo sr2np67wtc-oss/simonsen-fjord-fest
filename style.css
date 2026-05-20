@@ -37,11 +37,11 @@ header {
 
 /* ====== NAV ====== */
 nav a {
-    margin-left: 24px;
+    margin-left: 20px;
     text-decoration: none;
     color: #ccc;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.4px;
     transition: color 0.2s;
 }
@@ -149,6 +149,66 @@ nav a:hover {
 .bestill-btn:hover {
     background: #1a1a2e;
     color: #fff;
+}
+
+/* ====== SLIK FUNGERER DET ====== */
+.slik {
+    max-width: 760px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+}
+
+.slik h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+}
+
+.slik-ingress {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 28px;
+}
+
+.slik-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.slik-steg {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.slik-ikon {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.slik-steg h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+}
+
+.slik-steg p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #555;
+    margin: 0;
 }
 
 /* ====== ANMELDELSER ====== */
@@ -260,6 +320,87 @@ nav a:hover {
     width: 100%;
 }
 
+/* ====== FAQ ====== */
+.faq {
+    max-width: 760px;
+    margin: 0 auto 60px auto;
+    padding: 0 20px;
+}
+
+.faq h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+}
+
+.faq-ingress {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 28px;
+}
+
+.faq-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-item {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.faq-knapp {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 12px;
+    font-family: inherit;
+}
+
+.faq-knapp span:first-child {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.faq-ikon {
+    font-size: 22px;
+    color: #1a1a2e;
+    font-weight: 300;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.faq-item.aapen .faq-ikon {
+    transform: rotate(45deg);
+}
+
+.faq-svar {
+    display: none;
+    margin: 0;
+    padding: 0 22px 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.faq-item.aapen .faq-svar {
+    display: block;
+}
+
 /* ====== FOOTER ====== */
 footer {
     background: #1a1a2e;
@@ -285,16 +426,14 @@ footer a:hover {
 
 /* ====== RESPONSIV ====== */
 @media (max-width: 600px) {
-    .products {
-        grid-template-columns: 1fr;
-    }
-
+    .products,
+    .slik-grid,
     .anmeldelser-grid {
         grid-template-columns: 1fr;
     }
 
     nav a {
-        margin-left: 12px;
-        font-size: 13px;
+        margin-left: 10px;
+        font-size: 12px;
     }
 }
