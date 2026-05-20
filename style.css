@@ -80,11 +80,7 @@ section h2 {
     color: #1a1a2e;
     margin-top: 0;
     margin-bottom: 16px;
-}
-
-/* ====== UTLEIE ====== */
-#utleie h2 {
-    text-align: left;
+    text-align: center;
 }
 
 /* ====== PRODUKTER ====== */
@@ -177,14 +173,11 @@ section h2 {
 }
 
 /* ====== KALENDER ====== */
-.calendar h2 {
-    text-align: left;
-}
-
 .calendar > p {
+    text-align: center;
     color: #666;
     font-size: 13px;
-    margin-top: 0;
+    margin-top: -8px;
     margin-bottom: 14px;
 }
 
@@ -200,16 +193,11 @@ section h2 {
     width: 100%;
 }
 
-.slik h2 {
-    text-align: center;
-    margin-bottom: 6px;
-}
-
 .slik-ingress {
     text-align: center;
     color: #666;
     font-size: 14px;
-    margin-top: 0;
+    margin-top: -8px;
     margin-bottom: 20px;
 }
 
@@ -251,10 +239,6 @@ section h2 {
 }
 
 /* ====== ANMELDELSER ====== */
-.anmeldelser h2 {
-    text-align: left;
-}
-
 .anmeldelser-kolonne {
     display: flex;
     flex-direction: column;
@@ -293,14 +277,11 @@ section h2 {
 }
 
 /* ====== FAQ ====== */
-.faq h2 {
-    text-align: left;
-}
-
 .faq-ingress {
+    text-align: center;
     color: #666;
     font-size: 13px;
-    margin-top: 0;
+    margin-top: -8px;
     margin-bottom: 16px;
 }
 
@@ -385,32 +366,6 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* ====== RESPONSIV (mobil) ====== */
-@media (max-width: 700px) {
-    .topp-rad,
-    .bunn-rad {
-        grid-template-columns: 1fr;
-    }
-
-    .products,
-    .slik-grid {
-        grid-template-columns: 1fr;
-    }
-
-    nav a {
-        margin-left: 10px;
-        font-size: 12px;
-    }
-
-    section h2 {
-        text-align: center !important;
-    }
-
-    .faq-ingress,
-    .calendar > p {
-        text-align: center;
-    }
-}
 /* ====== BOOKING-SIDE ====== */
 .booking-side {
     max-width: 680px;
@@ -541,15 +496,6 @@ footer a:hover {
     color: #1a1a2e;
 }
 
-@media (max-width: 600px) {
-    .booking-form {
-        padding: 24px 20px;
-    }
-
-    .form-rad {
-        grid-template-columns: 1fr;
-    }
-}
 /* ====== TAKKSIDE ====== */
 .takk-side {
     max-width: 580px;
@@ -618,4 +564,30 @@ footer a:hover {
 
 .takk-hjem-btn:hover {
     background: #2e2e50;
+}
+
+/* ====== RESPONSIV (mobil) ====== */
+@media (max-width: 700px) {
+    .topp-rad,
+    .bunn-rad {
+        grid-template-columns: 1fr;
+    }
+
+    .products,
+    .slik-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .booking-form {
+        padding: 24px 20px;
+    }
+
+    .form-rad {
+        grid-template-columns: 1fr;
+    }
 }
