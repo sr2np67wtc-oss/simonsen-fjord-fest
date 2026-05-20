@@ -101,6 +101,13 @@ nav a:hover {
     font-size: 15px;
 }
 
+/* ====== LEVERINGSBESKJED ====== */
+.delivery-summary {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;  /* Midtstiller leveringsbeskjed */
+}
+
 /* ====== BESTILL-KNAPP ====== */
 .bestill-btn {
     margin-top: 14px;
@@ -111,43 +118,4 @@ nav a:hover {
     border: 2px solid #000;
     background: #fff;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.bestill-btn:hover {
-    background: #000;
-    color: #fff;
-}
-
-/* ====== KALENDER ====== */
-.calendar {
-    max-width: 800px;
-    margin: 40px auto 60px auto;
-    padding: 0 20px;
-    text-align: center;
-}
-
-.calendar h2 {
-    font-size: 26px;
-    margin-bottom: 6px;
-}
-
-#utleieKalender {
-    transform: scale(0.7);
-    transform-origin: top center;
-    margin: 0 auto;
-}
-
-/* ====== BOOKING ====== */
-.booking {
-    max-width: 900px;
-    margin: 40px auto 60px auto;
-    text-align: center;
-}
-
-/* Midtstill Google Forms-skjemaet */
-.form-container iframe {
-    display: block;
-    margin: 0 auto;
-    border: none;
-}
+    transition: background 0.2s, color 0
