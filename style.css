@@ -550,3 +550,72 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 }
+/* ====== TAKKSIDE ====== */
+.takk-side {
+    max-width: 580px;
+    margin: 80px auto 80px auto;
+    padding: 0 24px;
+    text-align: center;
+}
+
+.takk-ikon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.takk-side h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+}
+
+.takk-tekst {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.takk-detaljer {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.takk-detaljer p {
+    font-size: 14px;
+    color: #444;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.takk-detaljer a {
+    color: #1a1a2e;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.takk-detaljer a:hover {
+    text-decoration: underline;
+}
+
+.takk-hjem-btn {
+    display: inline-block;
+    padding: 13px 36px;
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    transition: background 0.2s;
+}
+
+.takk-hjem-btn:hover {
+    background: #2e2e50;
+}
