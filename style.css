@@ -15,16 +15,16 @@ header {
     background: #1a1a2e;
     padding: 16px 0;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
 .header-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,32 +50,55 @@ nav a:hover {
     color: #ffffff;
 }
 
-/* ====== UTLEIE ====== */
-#utleie {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
+/* ====== RADER (innhold-wrapper) ====== */
+.rad {
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    padding: 0 24px;
 }
 
-#utleie h2 {
-    text-align: center;
-    margin-bottom: 28px;
-    font-size: 26px;
+/* RAD 1: Produkter + Kalender */
+.topp-rad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* RAD 3: Anmeldelser + FAQ */
+.bunn-rad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ====== SEKSJONSOVERSKRIFTER ====== */
+section h2 {
+    font-size: 22px;
     font-weight: 700;
     color: #1a1a2e;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* ====== UTLEIE ====== */
+#utleie h2 {
+    text-align: left;
 }
 
 /* ====== PRODUKTER ====== */
 .products {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
+    margin-bottom: 14px;
 }
 
 .product {
     background: #ffffff;
     border-radius: 16px;
-    padding: 28px 20px;
+    padding: 22px 16px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
     text-align: center;
     display: flex;
@@ -91,50 +114,50 @@ nav a:hover {
 
 .product img {
     width: auto;
-    max-width: 150px;
-    height: 140px;
+    max-width: 130px;
+    height: 120px;
     object-fit: contain;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .product h3 {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     color: #1a1a2e;
 }
 
 .product p {
-    margin: 3px 0;
-    font-size: 14px;
+    margin: 2px 0;
+    font-size: 13px;
     line-height: 1.5;
     color: #555;
 }
 
 .price {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     color: #1a1a2e;
 }
 
 /* ====== LEVERINGSBESKJED ====== */
 .delivery-summary {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    margin-top: 20px;
     text-align: center;
     color: #444;
     background: #fff;
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 10px 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* ====== BESTILL-KNAPP ====== */
 .bestill-btn {
-    margin-top: 16px;
-    padding: 10px 28px;
-    font-size: 14px;
+    display: block;
+    margin-top: 14px;
+    padding: 9px 0;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 8px;
     border: 2px solid #1a1a2e;
@@ -142,6 +165,8 @@ nav a:hover {
     color: #1a1a2e;
     cursor: pointer;
     width: 100%;
+    text-align: center;
+    text-decoration: none;
     letter-spacing: 0.3px;
     transition: background 0.2s, color 0.2s;
 }
@@ -151,19 +176,33 @@ nav a:hover {
     color: #fff;
 }
 
+/* ====== KALENDER ====== */
+.calendar h2 {
+    text-align: left;
+}
+
+.calendar > p {
+    color: #666;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+#utleieKalender {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+}
+
 /* ====== SLIK FUNGERER DET ====== */
-.slik {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
+.slik.full {
+    width: 100%;
 }
 
 .slik h2 {
     text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .slik-ingress {
@@ -171,7 +210,7 @@ nav a:hover {
     color: #666;
     font-size: 14px;
     margin-top: 0;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 
 .slik-grid {
@@ -183,7 +222,7 @@ nav a:hover {
 .slik-steg {
     background: #fff;
     border-radius: 16px;
-    padding: 32px 20px;
+    padding: 28px 20px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
     text-align: center;
     display: flex;
@@ -193,154 +232,76 @@ nav a:hover {
 }
 
 .slik-ikon {
-    font-size: 40px;
+    font-size: 36px;
     line-height: 1;
 }
 
 .slik-steg h3 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: #1a1a2e;
     margin: 0;
 }
 
 .slik-steg p {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.65;
     color: #555;
     margin: 0;
 }
 
 /* ====== ANMELDELSER ====== */
-.anmeldelser {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-}
-
 .anmeldelser h2 {
-    text-align: center;
-    margin-bottom: 28px;
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
+    text-align: left;
 }
 
-.anmeldelser-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
+.anmeldelser-kolonne {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .anmeldelse {
     background: #ffffff;
     border-radius: 16px;
-    padding: 24px 20px;
+    padding: 20px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .stjerner {
     color: #f5a623;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 2px;
 }
 
 .sitat {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.65;
     color: #444;
     margin: 0;
     font-style: italic;
-    flex: 1;
 }
 
 .kunde {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #1a1a2e;
     margin: 0;
 }
 
-/* ====== KALENDER ====== */
-.calendar {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-}
-
-.calendar h2 {
-    text-align: center;
-    margin-bottom: 6px;
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
-}
-
-.calendar > p {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #666;
-    font-size: 14px;
-}
-
-#utleieKalender {
-    background: #fff;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
-}
-
-/* ====== BOOKING ====== */
-.booking {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-}
-
-.booking h2 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
-}
-
-.form-container {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
-    overflow: hidden;
-}
-
-.form-container iframe {
-    display: block;
-    width: 100%;
-}
-
 /* ====== FAQ ====== */
-.faq {
-    max-width: 760px;
-    margin: 0 auto 60px auto;
-    padding: 0 20px;
-}
-
 .faq h2 {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 8px;
+    text-align: left;
 }
 
 .faq-ingress {
-    text-align: center;
     color: #666;
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 0;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
 }
 
 .faq-liste {
@@ -361,7 +322,7 @@ nav a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 22px;
+    padding: 16px 20px;
     background: none;
     border: none;
     cursor: pointer;
@@ -371,13 +332,13 @@ nav a:hover {
 }
 
 .faq-knapp span:first-child {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: #1a1a2e;
 }
 
 .faq-ikon {
-    font-size: 22px;
+    font-size: 20px;
     color: #1a1a2e;
     font-weight: 300;
     flex-shrink: 0;
@@ -391,8 +352,8 @@ nav a:hover {
 .faq-svar {
     display: none;
     margin: 0;
-    padding: 0 22px 18px 22px;
-    font-size: 14px;
+    padding: 0 20px 16px 20px;
+    font-size: 13px;
     line-height: 1.7;
     color: #555;
 }
@@ -424,16 +385,29 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* ====== RESPONSIV ====== */
-@media (max-width: 600px) {
+/* ====== RESPONSIV (mobil) ====== */
+@media (max-width: 700px) {
+    .topp-rad,
+    .bunn-rad {
+        grid-template-columns: 1fr;
+    }
+
     .products,
-    .slik-grid,
-    .anmeldelser-grid {
+    .slik-grid {
         grid-template-columns: 1fr;
     }
 
     nav a {
         margin-left: 10px;
         font-size: 12px;
+    }
+
+    section h2 {
+        text-align: center !important;
+    }
+
+    .faq-ingress,
+    .calendar > p {
+        text-align: center;
     }
 }
