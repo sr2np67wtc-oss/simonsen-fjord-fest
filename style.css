@@ -105,7 +105,7 @@ nav a:hover {
 .delivery-summary {
     font-weight: bold;
     margin-top: 20px;
-    text-align: center;  /* Midtstiller leveringsbeskjed */
+    text-align: center;
 }
 
 /* ====== BESTILL-KNAPP ====== */
@@ -118,4 +118,78 @@ nav a:hover {
     border: 2px solid #000;
     background: #fff;
     cursor: pointer;
-    transition: background 0.2s, color 0
+    transition: background 0.2s, color 0.2s;
+}
+
+.bestill-btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* ====== KALENDER ====== */
+.calendar {
+    max-width: 760px;
+    margin: 40px auto 60px auto;
+    padding: 0 20px;
+}
+
+.calendar h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.calendar > p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ====== BOOKING ====== */
+.booking {
+    max-width: 760px;
+    margin: 40px auto 60px auto;
+    padding: 0 20px;
+}
+
+.booking h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.form-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.form-container iframe {
+    display: block;
+    width: 100%;
+}
+
+/* ====== FOOTER ====== */
+footer {
+    background: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.06);
+    font-size: 14px;
+}
+
+footer p {
+    margin: 6px 0;
+}
+
+footer a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
