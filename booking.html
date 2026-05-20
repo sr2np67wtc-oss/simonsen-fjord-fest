@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking – Simonsen Fjord & Fest</title>
-    <link rel="stylesheet" href="style.css?v=103">
+    <link rel="stylesheet" href="style.css?v=104">
     <link rel="icon" type="image/png" href="logo.png">
 </head>
 
@@ -28,13 +28,74 @@
     </header>
 
     <main>
-        <section class="booking">
-            <h2>Reserver utstyr</h2>
-            <p class="faq-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
-            <div class="form-container">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
-                    width="100%" height="900" frameborder="0"></iframe>
-            </div>
+        <section class="booking-side">
+            <h1>Reserver utstyr</h1>
+            <p class="booking-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
+
+            <form action="https://formspree.io/f/xredpglw" method="POST" class="booking-form">
+
+                <div class="form-rad">
+                    <div class="form-felt">
+                        <label for="navn">Navn *</label>
+                        <input type="text" id="navn" name="navn" placeholder="Ditt fulle navn" required>
+                    </div>
+                    <div class="form-felt">
+                        <label for="telefon">Telefon *</label>
+                        <input type="tel" id="telefon" name="telefon" placeholder="+47 000 00 000" required>
+                    </div>
+                </div>
+
+                <div class="form-felt">
+                    <label for="epost">E-post *</label>
+                    <input type="email" id="epost" name="epost" placeholder="din@epost.no" required>
+                </div>
+
+                <div class="form-felt">
+                    <label>Hva ønsker du å leie? *</label>
+                    <div class="radio-gruppe">
+                        <label class="radio-valg">
+                            <input type="radio" name="utstyr" value="JBL PartyBox 320 – 500 kr/helg, 800 kr/uke" required>
+                            JBL PartyBox 320 – 500 kr / helg, 800 kr / uke
+                        </label>
+                        <label class="radio-valg">
+                            <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk) – 100 kr/helg, 150 kr/uke">
+                            Trådløse Mikrofoner (2 stk) – 100 kr / helg, 150 kr / uke
+                        </label>
+                        <label class="radio-valg">
+                            <input type="radio" name="utstyr" value="Begge deler – 550 kr/helg, 900 kr/uke">
+                            Begge deler – 550 kr / helg, 900 kr / uke
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-rad">
+                    <div class="form-felt">
+                        <label for="startdato">Startdato *</label>
+                        <input type="date" id="startdato" name="startdato" required>
+                    </div>
+                    <div class="form-felt">
+                        <label for="sluttdato">Sluttdato *</label>
+                        <input type="date" id="sluttdato" name="sluttdato" required>
+                    </div>
+                </div>
+
+                <div class="form-felt">
+                    <label for="adresse">Leveringsadresse *</label>
+                    <input type="text" id="adresse" name="adresse" placeholder="Gateadresse, postnummer, by" required>
+                </div>
+
+                <div class="form-felt">
+                    <label for="melding">Anledning / tilleggsinfo</label>
+                    <textarea id="melding" name="melding" rows="4" placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
+                </div>
+
+                <button type="submit" class="send-btn">Send reservasjon</button>
+
+                <p class="form-merknad">
+                    Vi svarer vanligvis innen noen timer. Sjekk gjerne
+                    <a href="index.html#kalender">tilgjengelighetskalenderen</a> først.
+                </p>
+            </form>
         </section>
     </main>
 
