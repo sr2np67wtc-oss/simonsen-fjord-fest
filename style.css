@@ -1,17 +1,21 @@
 /* ====== GLOBALT ====== */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    color: #333;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f2f5;
+    color: #222;
 }
 
 /* ====== HEADER ====== */
 header {
-    background: #ffffff;
+    background: #1a1a2e;
     padding: 16px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    margin-bottom: 50px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+    margin-bottom: 60px;
 }
 
 .header-container {
@@ -24,172 +28,171 @@ header {
 }
 
 .logo {
-    width: 95px;
+    width: 90px;
     height: auto;
 }
 
 /* ====== NAV ====== */
 nav a {
-    margin-left: 26px;
+    margin-left: 24px;
     text-decoration: none;
-    color: #333;
+    color: #ccc;
     font-weight: 600;
-    font-size: 15px;
-    transition: color 0.3s;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    transition: color 0.2s;
 }
 
 nav a:hover {
-    color: #000;
+    color: #ffffff;
+}
+
+/* ====== SEKSJONSOVERSKRIFTER ====== */
+.section-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a2e;
 }
 
 /* ====== UTLEIE ====== */
 #utleie {
-    max-width: 1200px;
-    margin: 40px auto 60px auto;
+    max-width: 760px;
+    margin: 0 auto 60px auto;
     padding: 0 20px;
 }
 
 #utleie h2 {
     text-align: center;
-    margin-bottom: 32px;
-    font-size: 28px;
+    margin-bottom: 28px;
+    font-size: 26px;
     font-weight: 700;
+    color: #1a1a2e;
 }
 
 /* ====== PRODUKTER ====== */
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 /* PRODUKT-BOKS */
 .product {
     background: #ffffff;
     border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    max-width: 300px;
+    padding: 28px 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
 }
 
 /* BILDER */
 .product img {
     width: auto;
-    max-width: 160px;
-    height: auto;
-    margin: 0 auto 14px auto;
-    display: block;
+    max-width: 150px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 16px;
 }
 
-/* TEKST UNDER PRODUKTENE */
+/* TEKST */
 .product h3 {
-    font-size: 19px;
-    margin: 10px 0;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #1a1a2e;
 }
 
 .product p {
-    margin: 4px 0;
-    font-size: 15px;
-    line-height: 1.4;
-    text-align: center;
+    margin: 3px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
 }
 
 .price {
-    font-weight: bold;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #1a1a2e;
 }
 
 /* ====== LEVERINGSBESKJED ====== */
 .delivery-summary {
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 600;
     margin-top: 20px;
     text-align: center;
+    color: #444;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 /* ====== BESTILL-KNAPP ====== */
 .bestill-btn {
+    margin-top: auto;
+    padding-top: 18px;
+    padding-bottom: 0;
+    width: 100%;
+    display: block;
+}
+
+.bestill-btn button,
+button.bestill-btn {
     margin-top: 14px;
-    padding: 10px 22px;
-    font-size: 15px;
-    font-weight: 600;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
     border-radius: 8px;
-    border: 2px solid #000;
+    border: 2px solid #1a1a2e;
     background: #fff;
+    color: #1a1a2e;
     cursor: pointer;
+    letter-spacing: 0.3px;
     transition: background 0.2s, color 0.2s;
 }
 
-.bestill-btn:hover {
-    background: #000;
+/* Fordi knappen er direkte i .product */
+.product .bestill-btn {
+    margin-top: 16px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 2px solid #1a1a2e;
+    background: #fff;
+    color: #1a1a2e;
+    cursor: pointer;
+    width: 100%;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.product .bestill-btn:hover {
+    background: #1a1a2e;
     color: #fff;
 }
 
 /* ====== KALENDER ====== */
 .calendar {
     max-width: 760px;
-    margin: 40px auto 60px auto;
+    margin: 0 auto 60px auto;
     padding: 0 20px;
 }
 
 .calendar h2 {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.calendar > p {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* ====== BOOKING ====== */
-.booking {
-    max-width: 760px;
-    margin: 40px auto 60px auto;
-    padding: 0 20px;
-}
-
-.booking h2 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.form-container {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-}
-
-.form-container iframe {
-    display: block;
-    width: 100%;
-}
-
-/* ====== FOOTER ====== */
-footer {
-    background: #ffffff;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.06);
-    font-size: 14px;
-}
-
-footer p {
-    margin: 6px 0;
-}
-
-footer a {
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
+    margin-bottom: 6px;
+    font-size: 26
