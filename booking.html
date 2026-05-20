@@ -33,7 +33,9 @@
             <p class="booking-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
 
             <form action="https://formspree.io/f/xredpglw" method="POST" class="booking-form">
-<input type="hidden" name="_next" value="https://simonsenutleie.no/takk.html">
+                <input type="hidden" name="_next" value="https://simonsenutleie.no/takk.html">
+                <input type="hidden" name="beregnet_pris" id="skjult-pris" value="">
+
                 <div class="form-rad">
                     <div class="form-felt">
                         <label for="navn">Navn *</label>
@@ -54,15 +56,15 @@
                     <label>Hva ønsker du å leie? *</label>
                     <div class="radio-gruppe">
                         <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="JBL PartyBox 320 – 500 kr/helg, 800 kr/uke" required>
+                            <input type="radio" name="utstyr" value="JBL PartyBox 320" required onchange="beregnPris()">
                             JBL PartyBox 320 – 500 kr / helg, 800 kr / uke
                         </label>
                         <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk) – 100 kr/helg, 150 kr/uke">
+                            <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk)" onchange="beregnPris()">
                             Trådløse Mikrofoner (2 stk) – 100 kr / helg, 150 kr / uke
                         </label>
                         <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="Begge deler – 550 kr/helg, 900 kr/uke">
+                            <input type="radio" name="utstyr" value="Begge deler" onchange="beregnPris()">
                             Begge deler – 550 kr / helg, 900 kr / uke
                         </label>
                     </div>
@@ -71,12 +73,24 @@
                 <div class="form-rad">
                     <div class="form-felt">
                         <label for="startdato">Startdato *</label>
-                        <input type="date" id="startdato" name="startdato" required>
+                        <input type="date" id="startdato" name="startdato" required onchange="beregnPris()">
                     </div>
                     <div class="form-felt">
                         <label for="sluttdato">Sluttdato *</label>
-                        <input type="date" id="sluttdato" name="sluttdato" required>
+                        <input type="date" id="sluttdato" name="sluttdato" required onchange="beregnPris()">
                     </div>
+                </div>
+
+                <!-- Prisberegning vises her -->
+                <div id="pris-boks" class="pris-boks" style="display:none;">
+                    <div class="pris-linje">
+                        <span id="pris-utstyr"></span>
+                        <span id="pris-dager"></span>
+                    </div>
+                    <div class="pris-total">
+                        Estimert pris: <strong id="pris-sum"></strong>
+                    </div>
+                    <p class="pris-merknad">Endelig pris bekreftes når vi tar kontakt.</p>
                 </div>
 
                 <div class="form-felt">
@@ -86,7 +100,8 @@
 
                 <div class="form-felt">
                     <label for="melding">Anledning / tilleggsinfo</label>
-                    <textarea id="melding" name="melding" rows="4" placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
+                    <textarea id="melding" name="melding" rows="4"
+                        placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
                 </div>
 
                 <button type="submit" class="send-btn">Send reservasjon</button>
@@ -104,6 +119,62 @@
         <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a
                 href="tel:+4795213090">+47 95 21 30 90</a></p>
     </footer>
+
+    <script>
+        const priser = {
+            "JBL PartyBox 320":        { helg: 500, uke: 800 },
+            "Trådløse Mikrofoner (2 stk)": { helg: 100, uke: 150 },
+            "Begge deler":             { helg: 550, uke: 900 }
+        };
+
+        function beregnPris() {
+            const utstyr = document.querySelector('input[name="utstyr"]:checked');
+            const start = document.getElementById('startdato').value;
+            const slutt = document.getElementById('sluttdato').value;
+            const boks = document.getElementById('pris-boks');
+
+            if (!utstyr || !start || !slutt) {
+                boks.style.display = 'none';
+                return;
+            }
+
+            const startDato = new Date(start);
+            const sluttDato = new Date(slutt);
+            const diffMs = sluttDato - startDato;
+
+            if (diffMs < 0) {
+                boks.style.display = 'none';
+                return;
+            }
+
+            const dager = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            const navn = utstyr.value;
+            const p = priser[navn];
+
+            let totalPris = 0;
+            let periodeText = '';
+
+            if (dager <= 3) {
+                totalPris = p.helg;
+                periodeText = dager === 1 ? '1 dag (helgpris)' : `${dager} dager (helgpris)`;
+            } else {
+                const uker = Math.ceil(dager / 7);
+                totalPris = uker * p.uke;
+                if (uker === 1) {
+                    periodeText = `${dager} dager (ukepris)`;
+                } else {
+                    periodeText = `${dager} dager (${uker} × ukepris)`;
+                }
+            }
+
+            document.getElementById('pris-utstyr').textContent = navn;
+            document.getElementById('pris-dager').textContent = periodeText;
+            document.getElementById('pris-sum').textContent = totalPris.toLocaleString('no-NO') + ' kr';
+            document.getElementById('skjult-pris').value = `${totalPris} kr (${periodeText})`;
+
+            boks.style.display = 'block';
+        }
+    </script>
 
 </body>
 
