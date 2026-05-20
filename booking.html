@@ -57,15 +57,15 @@
                     <div class="radio-gruppe">
                         <label class="radio-valg">
                             <input type="radio" name="utstyr" value="JBL PartyBox 320" required onchange="beregnPris()">
-                            JBL PartyBox 320 – 500 kr / helg, 800 kr / uke
+                            JBL PartyBox 320 – fra 500 kr / 3 dager
                         </label>
                         <label class="radio-valg">
                             <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk)" onchange="beregnPris()">
-                            Trådløse Mikrofoner (2 stk) – 100 kr / helg, 150 kr / uke
+                            Trådløse Mikrofoner (2 stk) – fra 100 kr / 3 dager
                         </label>
                         <label class="radio-valg">
                             <input type="radio" name="utstyr" value="Begge deler" onchange="beregnPris()">
-                            Begge deler – 550 kr / helg, 900 kr / uke
+                            Begge deler – fra 550 kr / 3 dager
                         </label>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="form-rad">
                     <div class="form-felt">
                         <label for="startdato">Startdato *</label>
-                        <input type="date" id="startdato" name="startdato" required onchange="beregnPris()">
+                        <input type="date" id="startdato" name="startdato" required onchange="oppdaterMinSluttdato()">
                     </div>
                     <div class="form-felt">
                         <label for="sluttdato">Sluttdato *</label>
@@ -81,10 +81,14 @@
                     </div>
                 </div>
 
-                <!-- Prisberegning vises her -->
+                <p class="dato-merknad">Minimum leieperiode er 3 dager.</p>
+
+                <!-- Prisberegning -->
                 <div id="pris-boks" class="pris-boks" style="display:none;">
                     <div class="pris-linje">
                         <span id="pris-utstyr"></span>
+                    </div>
+                    <div class="pris-linje pris-detalj">
                         <span id="pris-dager"></span>
                     </div>
                     <div class="pris-total">
@@ -122,10 +126,30 @@
 
     <script>
         const priser = {
-            "JBL PartyBox 320":        { helg: 500, uke: 800 },
-            "Trådløse Mikrofoner (2 stk)": { helg: 100, uke: 150 },
-            "Begge deler":             { helg: 550, uke: 900 }
+            "JBL PartyBox 320":            { helg: 500 },
+            "Trådløse Mikrofoner (2 stk)": { helg: 100 },
+            "Begge deler":                 { helg: 550 }
         };
+
+        function oppdaterMinSluttdato() {
+            const startVerdi = document.getElementById('startdato').value;
+            if (!startVerdi) return;
+            const start = new Date(startVerdi);
+            start.setDate(start.getDate() + 2);
+            const minSluttdato = start.toISOString().split('T')[0];
+            const sluttFelt = document.getElementById('sluttdato');
+            sluttFelt.min = minSluttdato;
+            if (sluttFelt.value && sluttFelt.value < minSluttdato) {
+                sluttFelt.value = minSluttdato;
+            }
+            beregnPris();
+        }
+
+        // Sett minimum startdato til i dag
+        window.addEventListener('DOMContentLoaded', function () {
+            const idag = new Date().toISOString().split('T')[0];
+            document.getElementById('startdato').min = idag;
+        });
 
         function beregnPris() {
             const utstyr = document.querySelector('input[name="utstyr"]:checked');
@@ -140,31 +164,26 @@
 
             const startDato = new Date(start);
             const sluttDato = new Date(slutt);
-            const diffMs = sluttDato - startDato;
+            const dager = Math.round((sluttDato - startDato) / (1000 * 60 * 60 * 24)) + 1;
 
-            if (diffMs < 0) {
+            if (dager < 1) {
                 boks.style.display = 'none';
                 return;
             }
 
-            const dager = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
             const navn = utstyr.value;
             const p = priser[navn];
+            const dagspris = Math.round(p.helg / 3);
 
-            let totalPris = 0;
-            let periodeText = '';
+            let totalPris, periodeText;
 
             if (dager <= 3) {
                 totalPris = p.helg;
-                periodeText = dager === 1 ? '1 dag (helgpris)' : `${dager} dager (helgpris)`;
+                periodeText = `${dager} dag${dager > 1 ? 'er' : ''} — grunnpris 3 dager`;
             } else {
-                const uker = Math.ceil(dager / 7);
-                totalPris = uker * p.uke;
-                if (uker === 1) {
-                    periodeText = `${dager} dager (ukepris)`;
-                } else {
-                    periodeText = `${dager} dager (${uker} × ukepris)`;
-                }
+                const ekstra = dager - 3;
+                totalPris = p.helg + (ekstra * dagspris);
+                periodeText = `3 dager (${p.helg} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagspris} kr)`;
             }
 
             document.getElementById('pris-utstyr').textContent = navn;
