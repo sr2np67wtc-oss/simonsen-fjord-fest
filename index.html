@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-  <link rel="stylesheet" href="style.css?v=100">
+  <link rel="stylesheet" href="style.css?v=101">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- FullCalendar -->
@@ -69,6 +69,7 @@
 <section id="booking" class="booking">
   <h2>Reserver utstyr</h2>
 
+  <!-- RIKTIG STRUKTUR – INGEN EKSTRA DIV -->
   <div class="form-container">
     <iframe 
       src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
@@ -129,7 +130,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
           if (!start) continue;
 
-          // ✔ DENNE VAR DEN SOM FUNKET
           events.push({
             title: title || "Opptatt",
             start: start,
