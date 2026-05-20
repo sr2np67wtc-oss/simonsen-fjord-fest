@@ -22,7 +22,7 @@
                 <a href="#utleie">Utleie</a>
                 <a href="#slik">Slik fungerer det</a>
                 <a href="#kalender">Tilgjengelighet</a>
-                <a href="#booking">Booking</a>
+                <a href="booking.html">Booking</a>
                 <a href="vilkar.html">Avtalevilkår</a>
                 <a href="#kontakt">Kontakt</a>
             </nav>
@@ -39,7 +39,7 @@
                     <p>Kraftig lyd, Bluetooth, 12–18 timer batteri.</p>
                     <p class="price">500 kr / Helg (3 dager)</p>
                     <p class="price">800 kr / Uke (7 dager)</p>
-                    <button class="bestill-btn" onclick="scrollToBooking()">Bestill</button>
+                    <a href="booking.html" class="bestill-btn">Bestill</a>
                 </div>
 
                 <div class="product">
@@ -48,7 +48,7 @@
                     <p>Perfekt til taler, karaoke og arrangementer.</p>
                     <p class="price">100 kr / Helg (3 dager)</p>
                     <p class="price">150 kr / Uke (7 dager)</p>
-                    <button class="bestill-btn" onclick="scrollToBooking()">Bestill</button>
+                    <a href="booking.html" class="bestill-btn">Bestill</a>
                 </div>
             </div>
             <p class="delivery-summary">🚚 Levering og henting er inkludert i prisen innenfor Stavanger‑området.</p>
@@ -103,14 +103,6 @@
             <div id="utleieKalender"></div>
         </section>
 
-        <section id="booking" class="booking">
-            <h2>Reserver utstyr</h2>
-            <div class="form-container">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
-                    width="100%" height="900" frameborder="0"></iframe>
-            </div>
-        </section>
-
         <section id="faq" class="faq">
             <h2>Vanlige spørsmål</h2>
             <p class="faq-ingress">Finner du ikke svaret du leter etter? Ta kontakt med oss direkte.</p>
@@ -161,10 +153,6 @@
     </footer>
 
     <script>
-        function scrollToBooking() {
-            document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
-        }
-
         function toggleFaq(knapp) {
             const item = knapp.parentElement;
             const erAapen = item.classList.contains("aapen");
