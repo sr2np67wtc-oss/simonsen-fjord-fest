@@ -89,11 +89,14 @@ Begge deler – fra 600 kr / 3 dager
 </div>
 </div>
 
-<p class="dato-merknad">Minimum leieperiode er 3 dager.</p>
+<p class="dato-merknad">Minimum leieperiode er 3 dager. Leier du mer enn 3 dager får du <strong>10% rabatt</strong> 🎉</p>
 
 <div id="pris-boks" class="pris-boks" style="display:none;">
 <div class="pris-linje"><span id="pris-utstyr"></span></div>
 <div class="pris-linje pris-detalj"><span id="pris-dager"></span></div>
+<div class="pris-linje pris-detalj" id="rabatt-linje" style="display:none; color:#28a745;">
+<span id="pris-rabatt"></span>
+</div>
 <div class="pris-total">Estimert pris: <strong id="pris-sum"></strong></div>
 <p class="pris-merknad">Endelig pris bekreftes når vi tar kontakt.</p>
 </div>
@@ -203,10 +206,22 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
             periodeText = `Ukespris (${p.uke} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisUke} kr)`;
         }
 
+        /* 10% rabatt for leie over 3 dager */
+        const rabattLinje = document.getElementById('rabatt-linje');
+        const prisRabatt  = document.getElementById('pris-rabatt');
+        if (dager > 3) {
+            const rabatt   = Math.round(totalPris * 0.10);
+            totalPris      = Math.round(totalPris * 0.90);
+            prisRabatt.textContent  = `10% rabatt (−${rabatt.toLocaleString('no-NO')} kr)`;
+            rabattLinje.style.display = 'block';
+        } else {
+            rabattLinje.style.display = 'none';
+        }
+
         document.getElementById('pris-utstyr').textContent = utstyr.value;
         document.getElementById('pris-dager').textContent  = periodeText;
         document.getElementById('pris-sum').textContent    = totalPris.toLocaleString('no-NO') + ' kr';
-        document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText})`;
+        document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText}${dager > 3 ? ', inkl. 10% rabatt' : ''})`;
         boks.style.display = 'block';
     }
 </script>
