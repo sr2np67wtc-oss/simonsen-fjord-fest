@@ -496,102 +496,82 @@ footer a:hover {
     color: #1a1a2e;
 }
 
-/* ====== TAKKSIDE ====== */
-.takk-side {
-    max-width: 580px;
-    margin: 80px auto 80px auto;
+/* ====== VILKÅR-SIDE ====== */
+.vilkar {
+    max-width: 720px;
+    margin: 48px auto 80px auto;
     padding: 0 24px;
-    text-align: center;
 }
 
-.takk-ikon {
-    font-size: 64px;
-    margin-bottom: 20px;
-}
-
-.takk-side h1 {
-    font-size: 28px;
+.vilkar h1 {
+    font-size: 26px;
     font-weight: 700;
     color: #1a1a2e;
-    margin-bottom: 14px;
-}
-
-.takk-tekst {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.7;
     margin-bottom: 28px;
 }
 
-.takk-detaljer {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px 28px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
-    margin-bottom: 32px;
+.vilkar h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-top: 28px;
+    margin-bottom: 6px;
     text-align: left;
 }
 
-.takk-detaljer p {
+.vilkar p,
+.vilkar ul {
     font-size: 14px;
+    line-height: 1.75;
     color: #444;
-    margin: 8px 0;
-    line-height: 1.6;
+    margin: 0 0 8px 0;
 }
 
-.takk-detaljer a {
-    color: #1a1a2e;
-    font-weight: 700;
-    text-decoration: none;
+.vilkar ul {
+    padding-left: 20px;
 }
 
-.takk-detaljer a:hover {
-    text-decoration: underline;
+/* ====== PRIS-BOKS (booking) ====== */
+.pris-boks {
+    background: #f4f6ff;
+    border: 1.5px solid #c5cef0;
+    border-radius: 12px;
+    padding: 16px 20px;
 }
 
-.takk-hjem-btn {
-    display: inline-block;
-    padding: 13px 36px;
-    background: #1a1a2e;
-    color: #fff;
-    border-radius: 10px;
+.pris-linje {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.pris-detalj {
+    font-size: 13px;
+    color: #666;
+}
+
+.pris-total {
     font-size: 15px;
     font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 0.4px;
-    transition: background 0.2s;
+    color: #1a1a2e;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #c5cef0;
 }
 
-.takk-hjem-btn:hover {
-    background: #2e2e50;
+.pris-merknad {
+    font-size: 12px;
+    color: #999;
+    margin: 8px 0 0 0;
 }
 
-/* ====== RESPONSIV (mobil) ====== */
-@media (max-width: 700px) {
-    .topp-rad,
-    .bunn-rad {
-        grid-template-columns: 1fr;
-    }
-
-    .products,
-    .slik-grid {
-        grid-template-columns: 1fr;
-    }
-
-    nav a {
-        margin-left: 10px;
-        font-size: 12px;
-    }
-
-    .booking-form {
-        padding: 24px 20px;
-    }
-
-    .form-rad {
-        grid-template-columns: 1fr;
-    }
+.dato-merknad {
+    font-size: 12px;
+    color: #888;
+    margin: -10px 0 0 0;
 }
-/* ── Takk-side ─────────────────────────────── */
+
+/* ====== TAKK-SIDE ====== */
 .takk-side {
     max-width: 600px;
     margin: 80px auto;
@@ -649,7 +629,8 @@ footer a:hover {
 .takk-hjem-btn:hover {
     background: #2e2e50;
 }
-/* ── Apple-kalender ─────────────────────── */
+
+/* ====== APPLE-KALENDER ====== */
 .apple-kalender {
     background: #2c2c2e;
     border-radius: 16px;
@@ -752,7 +733,7 @@ footer a:hover {
 .kal-dot.rød  { background: #ff3b30; }
 .kal-dot.blå  { background: #0a84ff; }
 
-/* ── Hamburger-meny ─────────────────────── */
+/* ====== HAMBURGER-MENY ====== */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -763,6 +744,7 @@ footer a:hover {
     border: none;
     cursor: pointer;
     padding: 0;
+    margin-left: 16px;
     z-index: 1001;
 }
 
@@ -805,7 +787,28 @@ footer a:hover {
 
 .mobil-meny.aapen { display: flex; }
 
+/* ====== RESPONSIV (mobil) ====== */
 @media (max-width: 768px) {
-    #hoved-nav { display: none; }
-    .hamburger { display: flex; }
+    #hoved-nav a { display: none; }
+    .hamburger   { display: flex; }
+}
+
+@media (max-width: 700px) {
+    .topp-rad,
+    .bunn-rad {
+        grid-template-columns: 1fr;
+    }
+
+    .products,
+    .slik-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-form {
+        padding: 24px 20px;
+    }
+
+    .form-rad {
+        grid-template-columns: 1fr;
+    }
 }
