@@ -1,273 +1,95 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Avtalevilkår – Simonsen Fjord & Fest</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #1c1c1e;
-      --bg2: #2c2c2e;
-      --bg3: #3a3a3c;
-      --text: #f5f5f7;
-      --muted: #8e8e93;
-      --accent: #0a84ff;
-      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Nav ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(28,28,30,.88);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 52px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 700; font-size: 15px; letter-spacing: -.3px;
-    }
-    .nav-logo img { height: 32px; width: auto; border-radius: 6px; }
-    .nav-links {
-      display: flex; gap: 28px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 14px; color: var(--muted);
-      transition: color .2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 2px;
-      background: var(--text); border-radius: 2px;
-    }
-    .mobile-menu {
-      display: none; position: fixed; inset: 52px 0 0 0; z-index: 99;
-      background: rgba(28,28,30,.96);
-      backdrop-filter: blur(20px);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 32px; list-style: none;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 22px; font-weight: 600; }
-
-    /* ── Page content ── */
-    .page-header {
-      padding: 80px 24px 48px;
-      max-width: 760px; margin: 0 auto;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .page-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 14px;
-    }
-    .page-header h1 {
-      font-size: clamp(32px, 6vw, 52px);
-      font-weight: 800; letter-spacing: -.8px;
-      line-height: 1.1; margin-bottom: 16px;
-    }
-    .page-header p {
-      font-size: 17px; color: var(--muted); line-height: 1.65;
-    }
-
-    .content {
-      max-width: 760px; margin: 0 auto;
-      padding: 56px 24px 96px;
-    }
-    .content section {
-      margin-bottom: 48px;
-    }
-    .content h2 {
-      font-size: 22px; font-weight: 700;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .content h2 .num {
-      color: var(--accent); margin-right: 8px;
-    }
-    .content p {
-      font-size: 16px; color: var(--muted);
-      line-height: 1.75; margin-bottom: 12px;
-    }
-    .content ul {
-      list-style: none; margin-bottom: 12px;
-    }
-    .content ul li {
-      font-size: 16px; color: var(--muted);
-      line-height: 1.75; padding-left: 20px;
-      position: relative; margin-bottom: 6px;
-    }
-    .content ul li::before {
-      content: "–"; position: absolute; left: 0; color: var(--accent);
-    }
-    .highlight-box {
-      background: var(--bg2);
-      border-left: 3px solid var(--accent);
-      border-radius: 0 12px 12px 0;
-      padding: 18px 22px;
-      margin: 16px 0;
-    }
-    .highlight-box p { margin-bottom: 0; }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--muted); font-size: 14px;
-    }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--text); }
-
-    @media (max-width: 720px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtalevilkår – Simonsen Fjord & Fest</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
 </head>
+
 <body>
 
-<!-- ── Nav ── -->
-<nav>
-  <div class="nav-logo">
-    <img src="logo.png" alt="Simonsen" />
-    Simonsen Fjord &amp; Fest
-  </div>
-  <ul class="nav-links">
-    <li><a href="index.html">Forsiden</a></li>
-    <li><a href="booking.html">Booking</a></li>
-    <li><a href="vilkar.html" class="active">Avtalevilkår</a></li>
-    <li><a href="index.html#kontakt">Kontakt</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Meny">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<header>
+    <div class="header-container">
+        <a href="index.html">
+            <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+        </a>
+        <nav id="hoved-nav">
+            <a href="booking.html">Booking</a>
+            <a href="vilkar.html">Avtalevilkår</a>
+            <a href="index.html#kontakt">Kontakt</a>
+            <button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </div>
+</header>
 
-<ul class="mobile-menu" id="mobileMenu">
-  <li><a href="index.html">Forsiden</a></li>
-  <li><a href="booking.html">Booking</a></li>
-  <li><a href="vilkar.html">Avtalevilkår</a></li>
-  <li><a href="index.html#kontakt">Kontakt</a></li>
-</ul>
-
-<!-- ── Header ── -->
-<div class="page-header">
-  <p class="page-label">Juridisk</p>
-  <h1>Avtalevilkår</h1>
-  <p>Les nøye før du leier utstyr fra oss. Ved å bekrefte en booking godtar du vilkårene nedenfor.</p>
+<div class="mobil-meny" id="mobil-meny">
+    <a href="booking.html" onclick="lukkMeny()">Booking</a>
+    <a href="vilkar.html" onclick="lukkMeny()">Avtalevilkår</a>
+    <a href="index.html#kontakt" onclick="lukkMeny()">Kontakt</a>
 </div>
 
-<!-- ── Content ── -->
-<div class="content">
+<section class="vilkar">
+    <h1>Avtalevilkår for utleie av lyd- og eventutstyr</h1>
 
-  <section>
-    <h2><span class="num">§1</span>Avtaleparter</h2>
-    <p>Utleier er Simonsen Fjord &amp; Fest, heretter kalt «utleier». Leietaker er den personen som bekrefter bookingen, heretter kalt «leietaker». Avtalen er bindende fra det tidspunkt utleier sender skriftlig bekreftelse.</p>
-  </section>
+    <h2>1. Utleier</h2>
+    <p><strong>Simonsen Fjord & Fest</strong><br>
+    Org.nr: 936 057 179<br>
+    Adresse: Sørstrandveien 99, 4076 Vassøy<br>
+    Telefon: <a href="tel:+4795213090">952 13 090</a></p>
 
-  <section>
-    <h2><span class="num">§2</span>Leieobjekt og leieperiode</h2>
-    <p>Leieobjektet er det utstyret som er spesifisert i bookingbekreftelsen. Leieperioden løper fra avtalt hentedato til og med avtalt leveringsdato.</p>
+    <h2>2. Utleieobjekt</h2>
+    <p>Avtalen gjelder utleie av lyd- og eventutstyr, som for eksempel JBL PartyBox Stage 320 høyttaler med LED-lys og trådløse mikrofoner.</p>
+
+    <h2>3. Leieperiode og betaling</h2>
+    <p>Leieperiode avtales individuelt. Leiesum og eventuelt depositum skal være betalt før utlevering av utstyret.</p>
+
+    <h2>4. Utlevering og retur</h2>
+    <p>Utstyret utleveres og returneres etter avtale med utleier. Det skal leveres tilbake i samme stand som ved utlevering, med unntak av normal slitasje.</p>
+
+    <h2>5. Leietakers ansvar</h2>
     <ul>
-      <li>Utstyret hentes og leveres på avtalt sted til avtalt tid.</li>
-      <li>Forsinkelser utover 1 time uten forhåndsavtale kan medføre ekstra kostnader.</li>
-      <li>Forlenget leieperiode må avtales skriftlig i forkant.</li>
+        <li>Leietaker er fullt ansvarlig for utstyret i hele leieperioden.</li>
+        <li>Utstyret skal brukes på forsvarlig måte og i tråd med gjeldende lover og regler.</li>
+        <li>Eventuelle skader, tap eller ødeleggelse erstattes fullt ut av leietaker.</li>
+        <li>Utleier fraskriver seg ansvar for personskade, eiendomsskade eller økonomisk tap som følge av bruk av utstyret.</li>
     </ul>
-  </section>
 
-  <section>
-    <h2><span class="num">§3</span>Priser og betaling</h2>
-    <p>Gjeldende priser fremgår av utleiers nettside og bookingbekreftelsen.</p>
-    <div class="highlight-box">
-      <p>Betaling skjer etter avtale — enten ved henting eller via Vipps/bankoverforing senest dagen før leiestart. Ingen forhåndsbetaling kreves ved første gangs leie.</p>
-    </div>
-  </section>
+    <h2>6. Forsinket retur og mislighold</h2>
+    <p>Ved forsinket retur kan utleier kreve ekstra leie per påbegynt døgn. Ved vesentlig mislighold kan utleier nekte videre leie og kreve erstatning.</p>
 
-  <section>
-    <h2><span class="num">§4</span>Ansvar og skader</h2>
-    <p>Leietaker er ansvarlig for utstyret i hele leieperioden og plikter å behandle det med aktsomhet.</p>
-    <ul>
-      <li>Skader utover normal slitasje erstattes av leietaker til full innkjøpspris.</li>
-      <li>Tap eller tyveri av utstyr erstattes fullt ut av leietaker.</li>
-      <li>Fuktskader, fall fra høyde og lignende betraktes som skadeverk.</li>
-      <li>Utleier er ikke ansvarlig for konsekvenser av tekniske feil under leieperioden.</li>
-    </ul>
-  </section>
+    <h2>7. Signatur</h2>
+    <p>Avtalen er bindende når den er signert av begge parter.</p>
 
-  <section>
-    <h2><span class="num">§5</span>Avbestilling</h2>
-    <p>Avbestilling skal skje skriftlig via e-post til utleier.</p>
-    <ul>
-      <li><strong>Mer enn 7 dager før leiestart:</strong> Gratis avbestilling.</li>
-      <li><strong>3–7 dager før leiestart:</strong> 50 % av leiebeløpet faktureres.</li>
-      <li><strong>Mindre enn 3 dager før leiestart:</strong> Fullt leiebeløp faktureres.</li>
-    </ul>
-  </section>
+    <p><strong>Utleier:</strong> Simonsen Fjord & Fest<br>
+    <strong>Leietaker:</strong> ____________________________</p>
+</section>
 
-  <section>
-    <h2><span class="num">§6</span>Bruk av utstyret</h2>
-    <p>Utstyret skal kun brukes til det formål det er beregnet for og i henhold til produsentens anvisninger.</p>
-    <ul>
-      <li>Utstyret skal ikke videreutleies til tredjepart.</li>
-      <li>Utstyret skal ikke tas ut av Norge uten skriftlig tillatelse.</li>
-      <li>Bruk som medfører unødvendig slitasje eller skade er ikke tillatt.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2><span class="num">§7</span>Tilbakelevering</h2>
-    <p>Utstyret skal leveres tilbake i samme stand som ved utlevering, rengjort og komplett med alt tilbehør. Manglende tilbehør faktureres separat.</p>
-  </section>
-
-  <section>
-    <h2><span class="num">§8</span>Force majeure</h2>
-    <p>Ingen av partene er ansvarlig for forsinkelser eller manglende oppfyllelse som skyldes forhold utenfor partenes kontroll, herunder naturkatastrofer, streik eller offentlige pålegg.</p>
-  </section>
-
-  <section>
-    <h2><span class="num">§9</span>Tvister</h2>
-    <p>Eventuelle tvister søkes løst i minnelighet. Dersom dette ikke fører frem, er partene enige om at norsk rett skal legges til grunn og at tvisten avgjøres ved leietakers eller utleiers verneting i Vestfold.</p>
-  </section>
-
-  <section>
-    <h2><span class="num">§10</span>Kontakt</h2>
-    <p>For spørsmål om avtalevilkårene, ta kontakt med oss:</p>
-    <div class="highlight-box">
-      <p>📧 simonsenmail@gmail.com</p>
-    </div>
-    <br>
-    <a href="index.html#kontakt" style="display:inline-block; background:var(--accent); color:#fff; padding:12px 28px; border-radius:980px; font-size:15px; font-weight:600;">Gå til kontaktskjema</a>
-  </section>
-
-</div>
-
-<!-- ── Footer ── -->
-<footer>
-  <p>© 2026 Simonsen Fjord &amp; Fest · <a href="vilkar.html">Avtalevilkår</a></p>
+<footer id="kontakt">
+    <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
+    <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    function toggleMeny() {
+        document.getElementById('mobil-meny').classList.toggle('aapen');
+        document.getElementById('hamburger').classList.toggle('aapen');
+    }
+    function lukkMeny() {
+        document.getElementById('mobil-meny').classList.remove('aapen');
+        document.getElementById('hamburger').classList.remove('aapen');
+    }
+    document.addEventListener('click', function (e) {
+        const meny = document.getElementById('mobil-meny');
+        const btn  = document.getElementById('hamburger');
+        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
+            lukkMeny();
+        }
+    });
 </script>
+
 </body>
 </html>
