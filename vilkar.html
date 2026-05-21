@@ -16,6 +16,7 @@
             <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
         </a>
         <nav id="hoved-nav">
+            <a href="index.html">Hjem</a>
             <a href="booking.html">Booking</a>
             <a href="vilkar.html">Avtalevilkår</a>
             <a href="index.html#kontakt">Kontakt</a>
@@ -27,6 +28,7 @@
 </header>
 
 <div class="mobil-meny" id="mobil-meny">
+    <a href="index.html" onclick="lukkMeny()">Hjem</a>
     <a href="booking.html" onclick="lukkMeny()">Booking</a>
     <a href="vilkar.html" onclick="lukkMeny()">Avtalevilkår</a>
     <a href="index.html#kontakt" onclick="lukkMeny()">Kontakt</a>
@@ -68,28 +70,4 @@
     <strong>Leietaker:</strong> ____________________________</p>
 </section>
 
-<footer id="kontakt">
-    <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
-    <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
-</footer>
-
-<script>
-    function toggleMeny() {
-        document.getElementById('mobil-meny').classList.toggle('aapen');
-        document.getElementById('hamburger').classList.toggle('aapen');
-    }
-    function lukkMeny() {
-        document.getElementById('mobil-meny').classList.remove('aapen');
-        document.getElementById('hamburger').classList.remove('aapen');
-    }
-    document.addEventListener('click', function (e) {
-        const meny = document.getElementById('mobil-meny');
-        const btn  = document.getElementById('hamburger');
-        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
-            lukkMeny();
-        }
-    });
-</script>
-
-</body>
-</html>
+<footer id="
