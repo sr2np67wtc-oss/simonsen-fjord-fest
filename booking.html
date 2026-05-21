@@ -117,74 +117,75 @@
                 href="tel:+4795213090">+47 95 21 30 90</a></p>
     </footer>
 
-    <script>
-        const priser = {
-            "JBL PartyBox 320":            { helg: 500, uke: 800 },
-            "Trådløse Mikrofoner (2 stk)": { helg: 100, uke: 150 },
-            "Begge deler":                 { helg: 550, uke: 900 }
-        };
+<script>
+    const priser = {
+        "JBL PartyBox 320":            { helg: 500, uke: 800 },
+        "Trådløse Mikrofoner (2 stk)": { helg: 100, uke: 150 },
+        "Begge deler":                 { helg: 550, uke: 900 }
+    };
 
-        window.addEventListener('DOMContentLoaded', function () {
-            const idag = new Date().toISOString().split('T')[0];
-            document.getElementById('startdato').min = idag;
-        });
+    window.addEventListener('DOMContentLoaded', function () {
+        const idag = new Date().toISOString().split('T')[0];
+        document.getElementById('startdato').min = idag;
+    });
 
-        function oppdaterMinSluttdato() {
-            const startVerdi = document.getElementById('startdato').value;
-            if (!startVerdi) return;
-            const start = new Date(startVerdi);
-            start.setDate(start.getDate() + 2);
-            const minSluttdato = start.toISOString().split('T')[0];
-            const sluttFelt = document.getElementById('sluttdato');
-            sluttFelt.min = minSluttdato;
-            if (sluttFelt.value && sluttFelt.value < minSluttdato) {
-                sluttFelt.value = minSluttdato;
-            }
-            beregnPris();
+    function oppdaterMinSluttdato() {
+        const startVerdi = document.getElementById('startdato').value;
+        if (!startVerdi) return;
+        const start = new Date(startVerdi);
+        start.setDate(start.getDate() + 3); // retur etter minst 3 dager
+        const minSluttdato = start.toISOString().split('T')[0];
+        const sluttFelt = document.getElementById('sluttdato');
+        sluttFelt.min = minSluttdato;
+        if (sluttFelt.value && sluttFelt.value < minSluttdato) {
+            sluttFelt.value = minSluttdato;
         }
+        beregnPris();
+    }
 
-        function beregnPris() {
-            const utstyr = document.querySelector('input[name="utstyr"]:checked');
-            const start = document.getElementById('startdato').value;
-            const slutt = document.getElementById('sluttdato').value;
-            const boks = document.getElementById('pris-boks');
+    function beregnPris() {
+        const utstyr = document.querySelector('input[name="utstyr"]:checked');
+        const start  = document.getElementById('startdato').value;
+        const slutt  = document.getElementById('sluttdato').value;
+        const boks   = document.getElementById('pris-boks');
 
-            if (!utstyr || !start || !slutt) { boks.style.display = 'none'; return; }
+        if (!utstyr || !start || !slutt) { boks.style.display = 'none'; return; }
 
-            const dager = Math.round((new Date(slutt) - new Date(start)) / (1000 * 60 * 60 * 24)) + 1;
-            if (dager < 1) { boks.style.display = 'none'; return; }
+        // Sluttdato = returdato, så antall leiedager = differansen (ingen +1)
+        const dager = Math.round((new Date(slutt) - new Date(start)) / (1000 * 60 * 60 * 24));
+        if (dager < 1) { boks.style.display = 'none'; return; }
 
-            const p = priser[utstyr.value];
-            const dagsprisHelg = Math.round(p.helg / 3);
-            const dagsprisUke  = Math.round(p.uke  / 7);
+        const p = priser[utstyr.value];
+        const dagsprisHelg = Math.round(p.helg / 3);
+        const dagsprisUke  = Math.round(p.uke  / 7);
 
-            let totalPris, periodeText;
+        let totalPris, periodeText;
 
-            if (dager <= 3) {
-                totalPris   = p.helg;
-                periodeText = `${dager} dag${dager > 1 ? 'er' : ''} — grunnpris`;
-            } else if (dager <= 7) {
-                const beregnet = p.helg + (dager - 3) * dagsprisHelg;
-                totalPris = Math.min(beregnet, p.uke);
-                if (totalPris === p.uke) {
-                    periodeText = `${dager} dager — ukespris`;
-                } else {
-                    const ekstra = dager - 3;
-                    periodeText = `3 dager (${p.helg} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisHelg} kr)`;
-                }
+        if (dager <= 3) {
+            totalPris   = p.helg;
+            periodeText = `${dager} dag${dager > 1 ? 'er' : ''} — grunnpris`;
+        } else if (dager <= 7) {
+            const beregnet = p.helg + (dager - 3) * dagsprisHelg;
+            totalPris = Math.min(beregnet, p.uke);
+            if (totalPris === p.uke) {
+                periodeText = `${dager} dager — ukespris`;
             } else {
-                const ekstra = dager - 7;
-                totalPris   = p.uke + ekstra * dagsprisUke;
-                periodeText = `Ukespris (${p.uke} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisUke} kr)`;
+                const ekstra = dager - 3;
+                periodeText = `3 dager (${p.helg} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisHelg} kr)`;
             }
-
-            document.getElementById('pris-utstyr').textContent = utstyr.value;
-            document.getElementById('pris-dager').textContent  = periodeText;
-            document.getElementById('pris-sum').textContent    = totalPris.toLocaleString('no-NO') + ' kr';
-            document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText})`;
-            boks.style.display = 'block';
+        } else {
+            const ekstra = dager - 7;
+            totalPris   = p.uke + ekstra * dagsprisUke;
+            periodeText = `Ukespris (${p.uke} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisUke} kr)`;
         }
-    </script>
+
+        document.getElementById('pris-utstyr').textContent = utstyr.value;
+        document.getElementById('pris-dager').textContent  = periodeText;
+        document.getElementById('pris-sum').textContent    = totalPris.toLocaleString('no-NO') + ' kr';
+        document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText})`;
+        boks.style.display = 'block';
+    }
+</script>
 
 </body>
 </html>
