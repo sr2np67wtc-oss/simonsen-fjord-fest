@@ -535,7 +535,22 @@ footer a:hover {
 .vilkar ul {
     padding-left: 20px;
 }
+.vilkar ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
 
+.vilkar ul li {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.vilkar ul li::marker {
+    color: #1a1a2e;
+    font-size: 16px;
+}
 /* ====== PRIS-BOKS (booking) ====== */
 .pris-boks {
     background: #f4f6ff;
