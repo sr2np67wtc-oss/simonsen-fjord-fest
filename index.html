@@ -181,18 +181,9 @@
 
 <footer id="kontakt">
 <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
-<p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a
-href="tel:+4795213090">+47 95 21 30 90</a></p>
+<p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
 </footer>
 
-    <script>
-        /* ── FAQ ── */
-        function toggleFaq(knapp) {
-            const item = knapp.parentElement;
-            const erAapen = item.classList.contains("aapen");
-            document.querySelectorAll(".faq-item.aapen").forEach(i => i.classList.remove("aapen"));
-            if (!erAapen) item.classList.add("aapen");
-        }
 <script>
     /* ── FAQ ── */
     function toggleFaq(knapp) {
@@ -202,24 +193,6 @@ href="tel:+4795213090">+47 95 21 30 90</a></p>
         if (!erAapen) item.classList.add("aapen");
     }
 
-        /* ── Hamburger-meny ── */
-        function toggleMeny() {
-            const meny = document.getElementById('mobil-meny');
-            const btn  = document.getElementById('hamburger');
-            meny.classList.toggle('aapen');
-            btn.classList.toggle('aapen');
-        }
-        function lukkMeny() {
-            document.getElementById('mobil-meny').classList.remove('aapen');
-            document.getElementById('hamburger').classList.remove('aapen');
-        }
-        document.addEventListener('click', function (e) {
-            const meny = document.getElementById('mobil-meny');
-            const btn  = document.getElementById('hamburger');
-            if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
-                lukkMeny();
-            }
-        });
     /* ── Hamburger-meny ── */
     function toggleMeny() {
         document.getElementById('mobil-meny').classList.toggle('aapen');
@@ -232,80 +205,36 @@ href="tel:+4795213090">+47 95 21 30 90</a></p>
     document.addEventListener('click', function (e) {
         const meny = document.getElementById('mobil-meny');
         const btn  = document.getElementById('hamburger');
-        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) lukkMeny();
+        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
+            lukkMeny();
+        }
     });
 
-        /* ── Apple-kalender ── */
-        const CSV_URL = "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
     /* ── Apple-kalender ── */
-    // Oppdater til den deployede URL-en etter publisering:
-    const API_URL = "https://952bd067-fac6-42c4-b079-7e4349ca49e9-00-3q7ribyipscxj.spock.replit.dev/api";
-
-        let opptatteDager = new Set();
-        let visAar, visMaaned;
+    const API_URL = "https://simonsen-utleie-format.replit.app/api/bookings";
     const MAANEDER = ["januar","februar","mars","april","mai","juni",
                       "juli","august","september","oktober","november","desember"];
 
-        const maaneder = ["januar","februar","mars","april","mai","juni",
-                          "juli","august","september","oktober","november","desember"];
     let opptatteDatoer = [];
     let visAar, visMaaned;
 
-        function konverterDato(d) {
-            if (!d) return null;
-            const parts = d.trim().replace(/\r/g,"").split(".");
-            if (parts.length !== 3) return null;
-            return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-        }
     function datoNokkel(d) {
         return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
     }
-
-        function datoNokkel(dato) {
-            return `${dato.getFullYear()}-${String(dato.getMonth()+1).padStart(2,"0")}-${String(dato.getDate()).padStart(2,"0")}`;
-        }
     function erOpptatt(nokkel) {
         return opptatteDatoer.some(b => nokkel >= b.startDate && nokkel <= b.endDate);
     }
 
-        async function hentOpptatteDager() {
-            try {
-                const res = await fetch(CSV_URL);
-                const csv = await res.text();
-                const rows = csv.split("\n").map(r => r.split(","));
-                for (let i = 1; i < rows.length; i++) {
-                    const startRaw = (rows[i][1] || "").trim();
-                    const endRaw   = (rows[i][2] || "").trim();
-                    if (!startRaw) continue;
-                    const start = konverterDato(startRaw);
-                    const end   = konverterDato(endRaw || startRaw);
-                    if (!start || !end) continue;
-                    const cur = new Date(start);
-                    while (cur <= end) {
-                        opptatteDager.add(datoNokkel(cur));
-                        cur.setDate(cur.getDate() + 1);
-                    }
-                }
-            } catch (err) {
-                console.error("Feil ved henting av kalenderdata:", err);
-            }
-            tegnKalender();
     async function hentOpptatteDager() {
         try {
-            const r = await fetch(`${API_URL}/bookings`);
+            const r = await fetch(API_URL);
             opptatteDatoer = await r.json();
         } catch (err) {
             console.error("Kunne ikke hente kalenderdata:", err);
-}
+        }
         tegnKalender();
     }
 
-        function tegnKalender() {
-            const grid   = document.getElementById('kalGrid');
-            const tittel = document.getElementById('kalMaanedNavn');
-            grid.innerHTML = "";
-            tittel.textContent = maaneder[visMaaned].charAt(0).toUpperCase() +
-                                  maaneder[visMaaned].slice(1) + " " + visAar;
     function tegnKalender() {
         const grid   = document.getElementById('kalGrid');
         const tittel = document.getElementById('kalMaanedNavn');
@@ -314,31 +243,18 @@ href="tel:+4795213090">+47 95 21 30 90</a></p>
         tittel.textContent = MAANEDER[visMaaned].charAt(0).toUpperCase() +
                               MAANEDER[visMaaned].slice(1) + " " + visAar;
 
-            const idag     = new Date();
-            const idagNokkel = datoNokkel(idag);
-            const forsteDag = new Date(visAar, visMaaned, 1);
-            // Mandag=0 ... Søndag=6
-            let startOffset = forsteDag.getDay() - 1;
-            if (startOffset < 0) startOffset = 6;
         const idag       = new Date();
         const idagNokkel = datoNokkel(idag);
         const forsteDag  = new Date(visAar, visMaaned, 1);
         let offset = forsteDag.getDay() - 1;
         if (offset < 0) offset = 6;
 
-            const dagerIMaaned = new Date(visAar, visMaaned + 1, 0).getDate();
         for (let i = 0; i < offset; i++) {
             const tom = document.createElement('div');
             tom.className = 'kal-dag tom';
             grid.appendChild(tom);
         }
 
-            // Tom celler før første dag
-            for (let i = 0; i < startOffset; i++) {
-                const tom = document.createElement('div');
-                tom.className = 'kal-dag tom';
-                grid.appendChild(tom);
-            }
         const dagerIMaaned = new Date(visAar, visMaaned + 1, 0).getDate();
         for (let dag = 1; dag <= dagerIMaaned; dag++) {
             const dato   = new Date(visAar, visMaaned, dag);
@@ -346,54 +262,24 @@ href="tel:+4795213090">+47 95 21 30 90</a></p>
             const cell   = document.createElement('div');
             cell.className = 'kal-dag';
             cell.textContent = dag;
-
-            for (let dag = 1; dag <= dagerIMaaned; dag++) {
-                const dato   = new Date(visAar, visMaaned, dag);
-                const nokkel = datoNokkel(dato);
-                const cell   = document.createElement('div');
-                cell.className = 'kal-dag';
-                cell.textContent = dag;
-            if (erOpptatt(nokkel))      cell.classList.add('opptatt');
-            else if (nokkel === idagNokkel) cell.classList.add('idag');
-
-                if (nokkel === idagNokkel) {
-                    cell.classList.add('idag');
-                } else if (opptatteDager.has(nokkel)) {
-                    cell.classList.add('opptatt');
-                }
-                grid.appendChild(cell);
-            }
+            if (erOpptatt(nokkel))           cell.classList.add('opptatt');
+            else if (nokkel === idagNokkel)  cell.classList.add('idag');
             grid.appendChild(cell);
-}
+        }
     }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const no = new Date();
-            visAar    = no.getFullYear();
-            visMaaned = no.getMonth();
-
-            document.getElementById('kal-forrige').addEventListener('click', function () {
-                visMaaned--;
-                if (visMaaned < 0) { visMaaned = 11; visAar--; }
-                tegnKalender();
-            });
-            document.getElementById('kal-neste').addEventListener('click', function () {
-                visMaaned++;
-                if (visMaaned > 11) { visMaaned = 0; visAar++; }
-                tegnKalender();
-            });
     document.addEventListener('DOMContentLoaded', function () {
-        const no = new Date();
+        const no  = new Date();
         visAar    = no.getFullYear();
         visMaaned = no.getMonth();
 
-            hentOpptatteDager();
         document.getElementById('kal-forrige').addEventListener('click', function () {
-            visMaaned--; if (visMaaned < 0) { visMaaned = 11; visAar--; } tegnKalender();
-});
-    </script>
+            visMaaned--; if (visMaaned < 0) { visMaaned = 11; visAar--; }
+            tegnKalender();
+        });
         document.getElementById('kal-neste').addEventListener('click', function () {
-            visMaaned++; if (visMaaned > 11) { visMaaned = 0; visAar++; } tegnKalender();
+            visMaaned++; if (visMaaned > 11) { visMaaned = 0; visAar++; }
+            tegnKalender();
         });
 
         hentOpptatteDager();
