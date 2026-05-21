@@ -5,20 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simonsen Fjord & Fest – Utleie av lydutstyr</title>
-    <link rel="stylesheet" href="style.css?v=104">
+    <link rel="stylesheet" href="style.css?v=106">
     <link rel="icon" type="image/png" href="logo.png">
-
-    <!-- FullCalendar -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 </head>
 
 <body>
 
     <header>
         <div class="header-container">
-            <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
-            <nav>
+            <a href="index.html">
+                <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+            </a>
+            <nav id="hoved-nav">
                 <a href="#utleie">Utleie</a>
                 <a href="#slik">Slik fungerer det</a>
                 <a href="#kalender">Tilgjengelighet</a>
@@ -26,12 +24,25 @@
                 <a href="vilkar.html">Avtalevilkår</a>
                 <a href="#kontakt">Kontakt</a>
             </nav>
+            <button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
+    <!-- Mobilmeny -->
+    <div class="mobil-meny" id="mobil-meny">
+        <a href="#utleie" onclick="lukkMeny()">Utleie</a>
+        <a href="#slik" onclick="lukkMeny()">Slik fungerer det</a>
+        <a href="#kalender" onclick="lukkMeny()">Tilgjengelighet</a>
+        <a href="booking.html" onclick="lukkMeny()">Booking</a>
+        <a href="vilkar.html" onclick="lukkMeny()">Avtalevilkår</a>
+        <a href="#kontakt" onclick="lukkMeny()">Kontakt</a>
+    </div>
+
     <main>
 
-        <!-- RAD 1: Produkter + Kalender side om side -->
+        <!-- RAD 1: Produkter + Kalender -->
         <div class="rad topp-rad">
             <section id="utleie">
                 <h2>Utleieprodukter</h2>
@@ -58,11 +69,26 @@
 
             <section id="kalender" class="calendar">
                 <h2>Tilgjengelighet</h2>
-                <div id="utleieKalender"></div>
+                <div class="apple-kalender" id="appleKalender">
+                    <div class="kal-header">
+                        <button class="kal-nav" id="kal-forrige">&#8249;</button>
+                        <span class="kal-maaned-navn" id="kalMaanedNavn"></span>
+                        <button class="kal-nav" id="kal-neste">&#8250;</button>
+                    </div>
+                    <div class="kal-ukedager">
+                        <span>MAN</span><span>TIR</span><span>ONS</span>
+                        <span>TOR</span><span>FRE</span><span>LØR</span><span>SØN</span>
+                    </div>
+                    <div class="kal-grid" id="kalGrid"></div>
+                    <div class="kal-forklaring">
+                        <span class="kal-dot rød"></span> Opptatt
+                        <span class="kal-dot blå" style="margin-left:16px"></span> I dag
+                    </div>
+                </div>
             </section>
         </div>
 
-        <!-- RAD 2: Slik fungerer det (full bredde) -->
+        <!-- RAD 2: Slik fungerer det -->
         <div class="rad">
             <section id="slik" class="slik full">
                 <h2>Slik fungerer det</h2>
@@ -86,7 +112,7 @@
             </section>
         </div>
 
-        <!-- RAD 3: Anmeldelser + FAQ side om side -->
+        <!-- RAD 3: Anmeldelser + FAQ -->
         <div class="rad bunn-rad">
             <section id="anmeldelser" class="anmeldelser">
                 <h2>Hva kundene sier</h2>
@@ -117,7 +143,7 @@
                             <span>Hva skjer om noe blir skadet?</span>
                             <span class="faq-ikon">+</span>
                         </button>
-                        <p class="faq-svar">Vi ber deg behandle utstyret varsomt. Skulle noe bli skadet under leieperioden, avtaler vi erstatning basert på skadeomfanget. Ta kontakt med oss så fort som mulig om noe skjer. Se og avtalevilkår på nettsiden.</p>
+                        <p class="faq-svar">Vi ber deg behandle utstyret varsomt. Skulle noe bli skadet under leieperioden, avtaler vi erstatning basert på skadeomfanget. Ta kontakt med oss så fort som mulig om noe skjer.</p>
                     </div>
                     <div class="faq-item">
                         <button class="faq-knapp" onclick="toggleFaq(this)">
@@ -145,7 +171,7 @@
                             <span>Kan jeg leie utstyret lenger enn en uke?</span>
                             <span class="faq-ikon">+</span>
                         </button>
-                        <p class="faq-svar">Ja, det er mulig. Når du er inne på bestillingssiden så kan du legge inn så lang leieperiode du ønsker. Systemet beregner pris automatisk.</p>
+                        <p class="faq-svar">Ja, det er mulig. Legg inn ønsket periode i bestillingsskjemaet — systemet beregner pris automatisk.</p>
                     </div>
                 </div>
             </section>
@@ -160,6 +186,7 @@
     </footer>
 
     <script>
+        /* ── FAQ ── */
         function toggleFaq(knapp) {
             const item = knapp.parentElement;
             const erAapen = item.classList.contains("aapen");
@@ -167,56 +194,127 @@
             if (!erAapen) item.classList.add("aapen");
         }
 
-        document.addEventListener('DOMContentLoaded', async function () {
-            const calendarEl = document.getElementById('utleieKalender');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'no',
-                firstDay: 1,
-                height: "auto",
-                contentHeight: "auto",
-                aspectRatio: 1.35,
-                events: async function (fetchInfo, successCallback, failureCallback) {
-                    try {
-                        const csvUrl = "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
-                        const res = await fetch(csvUrl);
-                        const csv = await res.text();
-                        const rows = csv.split("\n").map(r => r.split(","));
-                        let events = [];
+        /* ── Hamburger-meny ── */
+        function toggleMeny() {
+            const meny = document.getElementById('mobil-meny');
+            const btn  = document.getElementById('hamburger');
+            meny.classList.toggle('aapen');
+            btn.classList.toggle('aapen');
+        }
+        function lukkMeny() {
+            document.getElementById('mobil-meny').classList.remove('aapen');
+            document.getElementById('hamburger').classList.remove('aapen');
+        }
+        document.addEventListener('click', function (e) {
+            const meny = document.getElementById('mobil-meny');
+            const btn  = document.getElementById('hamburger');
+            if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
+                lukkMeny();
+            }
+        });
 
-                        function convertDate(d) {
-                            if (!d) return null;
-                            const parts = d.trim().replace(/\r/g, "").split(".");
-                            if (parts.length !== 3) return null;
-                            return `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}`;
-                        }
+        /* ── Apple-kalender ── */
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/1dUOcTg3cLJVXh6C2MfSXl_lstz9wm8hcwucG-W6_CkI/export?format=csv&gid=1158072166";
 
-                        for (let i = 1; i < rows.length; i++) {
-                            const title = (rows[i][0] || "").trim();
-                            const startRaw = (rows[i][1] || "").trim();
-                            const endRaw = (rows[i][2] || "").trim();
-                            if (!startRaw) continue;
-                            const start = convertDate(startRaw);
-                            const end = convertDate(endRaw || startRaw);
-                            if (!start) continue;
-                            events.push({
-                                title: title || "Opptatt",
-                                start: start,
-                                end: end + "T23:59:59",
-                                color: "#ff4d4d"
-                            });
-                        }
-                        successCallback(events);
-                    } catch (err) {
-                        console.error("Feil ved henting av CSV:", err);
-                        failureCallback(err);
+        let opptatteDager = new Set();
+        let visAar, visMaaned;
+
+        const maaneder = ["januar","februar","mars","april","mai","juni",
+                          "juli","august","september","oktober","november","desember"];
+
+        function konverterDato(d) {
+            if (!d) return null;
+            const parts = d.trim().replace(/\r/g,"").split(".");
+            if (parts.length !== 3) return null;
+            return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+        }
+
+        function datoNokkel(dato) {
+            return `${dato.getFullYear()}-${String(dato.getMonth()+1).padStart(2,"0")}-${String(dato.getDate()).padStart(2,"0")}`;
+        }
+
+        async function hentOpptatteDager() {
+            try {
+                const res = await fetch(CSV_URL);
+                const csv = await res.text();
+                const rows = csv.split("\n").map(r => r.split(","));
+                for (let i = 1; i < rows.length; i++) {
+                    const startRaw = (rows[i][1] || "").trim();
+                    const endRaw   = (rows[i][2] || "").trim();
+                    if (!startRaw) continue;
+                    const start = konverterDato(startRaw);
+                    const end   = konverterDato(endRaw || startRaw);
+                    if (!start || !end) continue;
+                    const cur = new Date(start);
+                    while (cur <= end) {
+                        opptatteDager.add(datoNokkel(cur));
+                        cur.setDate(cur.getDate() + 1);
                     }
                 }
+            } catch (err) {
+                console.error("Feil ved henting av kalenderdata:", err);
+            }
+            tegnKalender();
+        }
+
+        function tegnKalender() {
+            const grid   = document.getElementById('kalGrid');
+            const tittel = document.getElementById('kalMaanedNavn');
+            grid.innerHTML = "";
+            tittel.textContent = maaneder[visMaaned].charAt(0).toUpperCase() +
+                                  maaneder[visMaaned].slice(1) + " " + visAar;
+
+            const idag     = new Date();
+            const idagNokkel = datoNokkel(idag);
+            const forsteDag = new Date(visAar, visMaaned, 1);
+            // Mandag=0 ... Søndag=6
+            let startOffset = forsteDag.getDay() - 1;
+            if (startOffset < 0) startOffset = 6;
+
+            const dagerIMaaned = new Date(visAar, visMaaned + 1, 0).getDate();
+
+            // Tom celler før første dag
+            for (let i = 0; i < startOffset; i++) {
+                const tom = document.createElement('div');
+                tom.className = 'kal-dag tom';
+                grid.appendChild(tom);
+            }
+
+            for (let dag = 1; dag <= dagerIMaaned; dag++) {
+                const dato   = new Date(visAar, visMaaned, dag);
+                const nokkel = datoNokkel(dato);
+                const cell   = document.createElement('div');
+                cell.className = 'kal-dag';
+                cell.textContent = dag;
+
+                if (nokkel === idagNokkel) {
+                    cell.classList.add('idag');
+                } else if (opptatteDager.has(nokkel)) {
+                    cell.classList.add('opptatt');
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const no = new Date();
+            visAar    = no.getFullYear();
+            visMaaned = no.getMonth();
+
+            document.getElementById('kal-forrige').addEventListener('click', function () {
+                visMaaned--;
+                if (visMaaned < 0) { visMaaned = 11; visAar--; }
+                tegnKalender();
             });
-            calendar.render();
+            document.getElementById('kal-neste').addEventListener('click', function () {
+                visMaaned++;
+                if (visMaaned > 11) { visMaaned = 0; visAar++; }
+                tegnKalender();
+            });
+
+            hentOpptatteDager();
         });
     </script>
 
 </body>
-
 </html>
