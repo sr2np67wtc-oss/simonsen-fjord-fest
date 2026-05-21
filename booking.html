@@ -5,186 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking – Simonsen Fjord & Fest</title>
-    <link rel="stylesheet" href="style.css?v=105">
+    <link rel="stylesheet" href="style.css?v=103">
     <link rel="icon" type="image/png" href="logo.png">
 </head>
 
 <body>
 
-    <header>
-        <div class="header-container">
-            <a href="index.html">
-                <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
-            </a>
-            <nav>
-                <a href="index.html#utleie">Utleie</a>
-                <a href="index.html#slik">Slik fungerer det</a>
-                <a href="index.html#kalender">Tilgjengelighet</a>
-                <a href="booking.html">Booking</a>
-                <a href="vilkar.html">Avtalevilkår</a>
-                <a href="index.html#kontakt">Kontakt</a>
-            </nav>
+<header>
+    <div class="header-container">
+        <a href="index.html">
+            <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+        </a>
+        <nav id="hoved-nav">
+            <a href="booking.html">Booking</a>
+            <a href="vilkar.html">Avtalevilkår</a>
+            <a href="index.html#kontakt">Kontakt</a>
+            <button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<div class="mobil-meny" id="mobil-meny">
+    <a href="booking.html" onclick="lukkMeny()">Booking</a>
+    <a href="vilkar.html" onclick="lukkMeny()">Avtalevilkår</a>
+    <a href="index.html#kontakt" onclick="lukkMeny()">Kontakt</a>
+</div>
+
+<main>
+    <section class="booking">
+        <h2>Reserver utstyr</h2>
+        <p class="faq-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
+        <div class="form-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJ1NwCAgeGAP1cgTiKZZ97Vq84YnXp29dSpPSjsWS5ziYUJQ/viewform?embedded=true"
+                width="100%" height="900" frameborder="0"></iframe>
         </div>
-    </header>
+    </section>
+</main>
 
-    <main>
-        <section class="booking-side">
-            <h1>Reserver utstyr</h1>
-            <p class="booking-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
-
-            <form action="https://formspree.io/f/xredpglw" method="POST" class="booking-form">
-                <input type="hidden" name="_next" value="https://simonsenutleie.no/takk.html">
-                <input type="hidden" name="beregnet_pris" id="skjult-pris" value="">
-
-                <div class="form-rad">
-                    <div class="form-felt">
-                        <label for="navn">Navn *</label>
-                        <input type="text" id="navn" name="navn" placeholder="Ditt fulle navn" required>
-                    </div>
-                    <div class="form-felt">
-                        <label for="telefon">Telefon *</label>
-                        <input type="tel" id="telefon" name="telefon" placeholder="+47 000 00 000" required>
-                    </div>
-                </div>
-
-                <div class="form-felt">
-                    <label for="epost">E-post *</label>
-                    <input type="email" id="epost" name="epost" placeholder="din@epost.no" required>
-                </div>
-
-                <div class="form-felt">
-                    <label>Hva ønsker du å leie? *</label>
-                    <div class="radio-gruppe">
-                        <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="JBL PartyBox 320" required onchange="beregnPris()">
-                            JBL PartyBox 320 – fra 500 kr / 3 dager
-                        </label>
-                        <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk)" onchange="beregnPris()">
-                            Trådløse Mikrofoner (2 stk) – fra 100 kr / 3 dager
-                        </label>
-                        <label class="radio-valg">
-                            <input type="radio" name="utstyr" value="Begge deler" onchange="beregnPris()">
-                            Begge deler – fra 550 kr / 3 dager
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-rad">
-                    <div class="form-felt">
-                        <label for="startdato">Startdato *</label>
-                        <input type="date" id="startdato" name="startdato" required onchange="oppdaterMinSluttdato()">
-                    </div>
-                    <div class="form-felt">
-                        <label for="sluttdato">Sluttdato *</label>
-                        <input type="date" id="sluttdato" name="sluttdato" required onchange="beregnPris()">
-                    </div>
-                </div>
-
-                <p class="dato-merknad">Minimum leieperiode er 3 dager.</p>
-
-                <div id="pris-boks" class="pris-boks" style="display:none;">
-                    <div class="pris-linje"><span id="pris-utstyr"></span></div>
-                    <div class="pris-linje pris-detalj"><span id="pris-dager"></span></div>
-                    <div class="pris-total">Estimert pris: <strong id="pris-sum"></strong></div>
-                    <p class="pris-merknad">Endelig pris bekreftes når vi tar kontakt.</p>
-                </div>
-
-                <div class="form-felt">
-                    <label for="adresse">Leveringsadresse *</label>
-                    <input type="text" id="adresse" name="adresse" placeholder="Gateadresse, postnummer, by" required>
-                </div>
-
-                <div class="form-felt">
-                    <label for="melding">Anledning / tilleggsinfo</label>
-                    <textarea id="melding" name="melding" rows="4"
-                        placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
-                </div>
-
-                <button type="submit" class="send-btn">Send reservasjon</button>
-
-                <p class="form-merknad">
-                    Vi svarer vanligvis innen noen timer. Sjekk gjerne
-                    <a href="index.html#kalender">tilgjengelighetskalenderen</a> først.
-                </p>
-            </form>
-        </section>
-    </main>
-
-    <footer id="kontakt">
-        <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
-        <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a
-                href="tel:+4795213090">+47 95 21 30 90</a></p>
-    </footer>
+<footer id="kontakt">
+    <p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
+    <p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
+</footer>
 
 <script>
-    const priser = {
-        "JBL PartyBox 320":            { helg: 500, uke: 800 },
-        "Trådløse Mikrofoner (2 stk)": { helg: 100, uke: 150 },
-        "Begge deler":                 { helg: 550, uke: 900 }
-    };
-
-    window.addEventListener('DOMContentLoaded', function () {
-        const idag = new Date().toISOString().split('T')[0];
-        document.getElementById('startdato').min = idag;
+    function toggleMeny() {
+        document.getElementById('mobil-meny').classList.toggle('aapen');
+        document.getElementById('hamburger').classList.toggle('aapen');
+    }
+    function lukkMeny() {
+        document.getElementById('mobil-meny').classList.remove('aapen');
+        document.getElementById('hamburger').classList.remove('aapen');
+    }
+    document.addEventListener('click', function (e) {
+        const meny = document.getElementById('mobil-meny');
+        const btn  = document.getElementById('hamburger');
+        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
+            lukkMeny();
+        }
     });
-
-    function oppdaterMinSluttdato() {
-        const startVerdi = document.getElementById('startdato').value;
-        if (!startVerdi) return;
-        const start = new Date(startVerdi);
-        start.setDate(start.getDate() + 3); // retur etter minst 3 dager
-        const minSluttdato = start.toISOString().split('T')[0];
-        const sluttFelt = document.getElementById('sluttdato');
-        sluttFelt.min = minSluttdato;
-        if (sluttFelt.value && sluttFelt.value < minSluttdato) {
-            sluttFelt.value = minSluttdato;
-        }
-        beregnPris();
-    }
-
-    function beregnPris() {
-        const utstyr = document.querySelector('input[name="utstyr"]:checked');
-        const start  = document.getElementById('startdato').value;
-        const slutt  = document.getElementById('sluttdato').value;
-        const boks   = document.getElementById('pris-boks');
-
-        if (!utstyr || !start || !slutt) { boks.style.display = 'none'; return; }
-
-        // Sluttdato = returdato, så antall leiedager = differansen (ingen +1)
-        const dager = Math.round((new Date(slutt) - new Date(start)) / (1000 * 60 * 60 * 24));
-        if (dager < 1) { boks.style.display = 'none'; return; }
-
-        const p = priser[utstyr.value];
-        const dagsprisHelg = Math.round(p.helg / 3);
-        const dagsprisUke  = Math.round(p.uke  / 7);
-
-        let totalPris, periodeText;
-
-        if (dager <= 3) {
-            totalPris   = p.helg;
-            periodeText = `${dager} dag${dager > 1 ? 'er' : ''} — grunnpris`;
-        } else if (dager <= 7) {
-            const beregnet = p.helg + (dager - 3) * dagsprisHelg;
-            totalPris = Math.min(beregnet, p.uke);
-            if (totalPris === p.uke) {
-                periodeText = `${dager} dager — ukespris`;
-            } else {
-                const ekstra = dager - 3;
-                periodeText = `3 dager (${p.helg} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisHelg} kr)`;
-            }
-        } else {
-            const ekstra = dager - 7;
-            totalPris   = p.uke + ekstra * dagsprisUke;
-            periodeText = `Ukespris (${p.uke} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisUke} kr)`;
-        }
-
-        document.getElementById('pris-utstyr').textContent = utstyr.value;
-        document.getElementById('pris-dager').textContent  = periodeText;
-        document.getElementById('pris-sum').textContent    = totalPris.toLocaleString('no-NO') + ' kr';
-        document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText})`;
-        boks.style.display = 'block';
-    }
 </script>
 
 </body>
