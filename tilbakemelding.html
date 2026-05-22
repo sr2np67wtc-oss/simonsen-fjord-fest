@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gi tilbakemelding – Simonsen Fjord & Fest</title>
+<link rel="stylesheet" href="style.css?v=105">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+.tilbakemelding-wrapper {
+    max-width: 560px;
+    margin: 48px auto 80px;
+    padding: 0 24px;
+}
+.tilbakemelding-wrapper h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.tilbakemelding-ingress {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 32px;
+}
+.tb-form {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.tb-felt {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.tb-felt label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+.tb-felt input,
+.tb-felt textarea {
+    padding: 11px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 9px;
+    font-size: 14px;
+    color: #333;
+    background: #fafafa;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color .2s;
+}
+.tb-felt input:focus,
+.tb-felt textarea:focus {
+    outline: none;
+    border-color: #1a1a2e;
+    background: #fff;
+}
+/* Star rating */
+.stjerne-gruppe {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+}
+.stjerne-gruppe input { display: none; }
+.stjerne-gruppe label {
+    font-size: 36px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color .15s;
+    font-weight: normal;
+}
+.stjerne-gruppe label:hover,
+.stjerne-gruppe label:hover ~ label,
+.stjerne-gruppe input:checked ~ label {
+    color: #f5a623;
+}
+.tb-send-btn {
+    width: 100%;
+    padding: 14px 0;
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s;
+}
+.tb-send-btn:hover { background: #2e2e50; }
+.tb-send-btn:disabled { opacity: .5; cursor: not-allowed; }
+.tb-suksess {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+}
+.tb-suksess .takk-ikon { font-size: 56px; margin-bottom: 12px; }
+.feil-melding {
+    background: #fff0f0;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #c00;
+    display: none;
+}
+@media (max-width: 500px) {
+    .tb-form { padding: 24px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-container">
+<a href="index.html">
+    <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+</a>
+<nav id="hoved-nav">
+    <a href="index.html">Hjem</a>
+    <a href="booking.html">Booking</a>
+    <a href="vilkar.html">Avtalevilkår</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+</div>
+</header>
+
+<div class="mobil-meny" id="mobil-meny">
+<a href="index.html" onclick="lukkMeny()">Hjem</a>
+<a href="booking.html" onclick="lukkMeny()">Booking</a>
+<a href="vilkar.html" onclick="lukkMeny()">Avtalevilkår</a>
+<a href="index.html#kontakt" onclick="lukkMeny()">Kontakt</a>
+</div>
+
+<main>
+<div class="tilbakemelding-wrapper">
+    <h1>Hvordan gikk det? ⭐</h1>
+    <p class="tilbakemelding-ingress">Din tilbakemelding hjelper oss å bli bedre og hjelper andre med å ta gode valg.</p>
+
+    <div class="tb-form" id="tbForm">
+        <div id="feilMelding" class="feil-melding"></div>
+
+        <div class="tb-felt">
+            <label>Navn *</label>
+            <input type="text" id="tb-navn" placeholder="Ditt navn" required>
+        </div>
+
+        <div class="tb-felt">
+            <label>Stjerner *</label>
+            <div class="stjerne-gruppe">
+                <input type="radio" name="rating" id="s5" value="5">
+                <label for="s5" title="5 stjerner">★</label>
+                <input type="radio" name="rating" id="s4" value="4">
+                <label for="s4" title="4 stjerner">★</label>
+                <input type="radio" name="rating" id="s3" value="3">
+                <label for="s3" title="3 stjerner">★</label>
+                <input type="radio" name="rating" id="s2" value="2">
+                <label for="s2" title="2 stjerner">★</label>
+                <input type="radio" name="rating" id="s1" value="1">
+                <label for="s1" title="1 stjerne">★</label>
+            </div>
+        </div>
+
+        <div class="tb-felt">
+            <label>Din kommentar *</label>
+            <textarea id="tb-kommentar" rows="4" placeholder="Fortell oss om din opplevelse..."></textarea>
+        </div>
+
+        <button type="button" class="tb-send-btn" id="tbSendBtn" onclick="sendTilbakemelding()">
+            Send tilbakemelding
+        </button>
+    </div>
+
+    <div class="tb-suksess" id="tbSuksess">
+        <div class="takk-ikon">🎉</div>
+        <h2 style="color:#1a1a2e;font-size:22px;margin-bottom:8px;">Tusen takk!</h2>
+        <p style="color:#666;font-size:15px;margin-bottom:24px;">Vi setter stor pris på tilbakemeldingen din.</p>
+        <a href="index.html" class="takk-hjem-btn">Tilbake til forsiden</a>
+    </div>
+</div>
+</main>
+
+<footer id="kontakt">
+<p>© 2026 Simonsen Fjord & Fest – Stavanger</p>
+<p>E-post: <a href="mailto:simonsen.andreas@gmail.com">simonsen.andreas@gmail.com</a> | Telefon: <a href="tel:+4795213090">+47 95 21 30 90</a></p>
+</footer>
+
+<script>
+    /* ── Hamburger ── */
+    function toggleMeny() {
+        document.getElementById('mobil-meny').classList.toggle('aapen');
+        document.getElementById('hamburger').classList.toggle('aapen');
+    }
+    function lukkMeny() {
+        document.getElementById('mobil-meny').classList.remove('aapen');
+        document.getElementById('hamburger').classList.remove('aapen');
+    }
+    document.addEventListener('click', function(e) {
+        const meny = document.getElementById('mobil-meny');
+        const btn  = document.getElementById('hamburger');
+        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) lukkMeny();
+    });
+
+    /* ── Les orderId fra URL ── */
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId   = parseInt(urlParams.get('ref') ?? '0', 10) || null;
+
+    async function sendTilbakemelding() {
+        const navn      = document.getElementById('tb-navn').value.trim();
+        const kommentar = document.getElementById('tb-kommentar').value.trim();
+        const ratingEl  = document.querySelector('input[name="rating"]:checked');
+        const feil      = document.getElementById('feilMelding');
+        const btn       = document.getElementById('tbSendBtn');
+
+        feil.style.display = 'none';
+
+        if (!navn) { vis_feil('Fyll inn ditt navn.'); return; }
+        if (!ratingEl) { vis_feil('Velg antall stjerner.'); return; }
+        if (!kommentar) { vis_feil('Skriv en kommentar.'); return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Sender...';
+
+        try {
+            const r = await fetch('https://simonsen-utleie-format.replit.app/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customerName: navn,
+                    rating:       parseInt(ratingEl.value, 10),
+                    comment:      kommentar,
+                    orderId:      orderId,
+                }),
+            });
+            if (!r.ok) throw new Error();
+            document.getElementById('tbForm').style.display    = 'none';
+            document.getElementById('tbSuksess').style.display = 'block';
+        } catch {
+            vis_feil('Noe gikk galt. Prøv igjen eller kontakt oss direkte.');
+            btn.disabled = false;
+            btn.textContent = 'Send tilbakemelding';
+        }
+    }
+
+    function vis_feil(tekst) {
+        const el = document.getElementById('feilMelding');
+        el.textContent = tekst;
+        el.style.display = 'block';
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+</script>
+
+</body>
+</html>
