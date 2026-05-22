@@ -14,16 +14,16 @@
 <header>
 <div class="header-container">
 <a href="index.html">
-<img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
+    <img src="logo.png" alt="Simonsen Fjord & Fest logo" class="logo">
 </a>
 <nav id="hoved-nav">
-<a href="index.html">Hjem</a>
-<a href="booking.html">Booking</a>
-<a href="vilkar.html">Avtalevilkår</a>
-<a href="index.html#kontakt">Kontakt</a>
-<button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
-<span></span><span></span><span></span>
-</button>
+    <a href="index.html">Hjem</a>
+    <a href="booking.html">Booking</a>
+    <a href="vilkar.html">Avtalevilkår</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <button class="hamburger" id="hamburger" aria-label="Åpne meny" onclick="toggleMeny()">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 </div>
 </header>
@@ -40,84 +40,84 @@
 <h1>Reserver utstyr</h1>
 <p class="booking-ingress">Fyll ut skjemaet så hører du fra oss innen kort tid for bekreftelse.</p>
 
-<form action="https://formspree.io/f/xredpglw" method="POST" class="booking-form">
-<input type="hidden" name="_next" value="https://simonsenutleie.no/takk.html">
-<input type="hidden" name="beregnet_pris" id="skjult-pris" value="">
+<form class="booking-form" id="bookingForm" onsubmit="sendBooking(event)">
 
-<div class="form-rad">
-<div class="form-felt">
-<label for="navn">Navn *</label>
-<input type="text" id="navn" name="navn" placeholder="Ditt fulle navn" required>
-</div>
-<div class="form-felt">
-<label for="telefon">Telefon *</label>
-<input type="tel" id="telefon" name="telefon" placeholder="+47 000 00 000" required>
-</div>
-</div>
+    <div id="feilMelding" style="display:none;background:#fff0f0;border:1px solid #fcc;border-radius:8px;padding:10px 14px;font-size:13px;color:#c00;"></div>
 
-<div class="form-felt">
-<label for="epost">E-post *</label>
-<input type="email" id="epost" name="epost" placeholder="din@epost.no" required>
-</div>
+    <div class="form-rad">
+        <div class="form-felt">
+            <label for="navn">Navn *</label>
+            <input type="text" id="navn" name="navn" placeholder="Ditt fulle navn" required>
+        </div>
+        <div class="form-felt">
+            <label for="telefon">Telefon *</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="+47 000 00 000" required>
+        </div>
+    </div>
 
-<div class="form-felt">
-<label>Hva ønsker du å leie? *</label>
-<div class="radio-gruppe">
-<label class="radio-valg">
-<input type="radio" name="utstyr" value="JBL PartyBox 320" required onchange="beregnPris()">
-JBL PartyBox 320 – fra 500 kr / 3 dager
-</label>
-<label class="radio-valg">
-<input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk)" onchange="beregnPris()">
-Trådløse Mikrofoner (2 stk) – fra 100 kr / 3 dager
-</label>
-<label class="radio-valg">
-<input type="radio" name="utstyr" value="Begge deler" onchange="beregnPris()">
-Begge deler – fra 600 kr / 3 dager
-</label>
-</div>
-</div>
+    <div class="form-felt">
+        <label for="epost">E-post *</label>
+        <input type="email" id="epost" name="epost" placeholder="din@epost.no" required>
+    </div>
 
-<div class="form-rad">
-<div class="form-felt">
-<label for="startdato">Startdato *</label>
-<input type="date" id="startdato" name="startdato" required onchange="oppdaterMinSluttdato()">
-</div>
-<div class="form-felt">
-<label for="sluttdato">Sluttdato *</label>
-<input type="date" id="sluttdato" name="sluttdato" required onchange="beregnPris()">
-</div>
-</div>
+    <div class="form-felt">
+        <label>Hva ønsker du å leie? *</label>
+        <div class="radio-gruppe">
+            <label class="radio-valg">
+                <input type="radio" name="utstyr" value="JBL PartyBox 320" required onchange="beregnPris()">
+                JBL PartyBox 320 – fra 500 kr / 3 dager
+            </label>
+            <label class="radio-valg">
+                <input type="radio" name="utstyr" value="Trådløse Mikrofoner (2 stk)" onchange="beregnPris()">
+                Trådløse Mikrofoner (2 stk) – fra 100 kr / 3 dager
+            </label>
+            <label class="radio-valg">
+                <input type="radio" name="utstyr" value="Begge deler" onchange="beregnPris()">
+                Begge deler – fra 600 kr / 3 dager
+            </label>
+        </div>
+    </div>
 
-<p class="dato-merknad">Minimum leieperiode er 3 dager. Leier du mer enn 3 dager får du <strong>10% rabatt</strong> 🎉</p>
+    <div class="form-rad">
+        <div class="form-felt">
+            <label for="startdato">Startdato *</label>
+            <input type="date" id="startdato" name="startdato" required onchange="oppdaterMinSluttdato()">
+        </div>
+        <div class="form-felt">
+            <label for="sluttdato">Sluttdato *</label>
+            <input type="date" id="sluttdato" name="sluttdato" required onchange="beregnPris()">
+        </div>
+    </div>
 
-<div id="pris-boks" class="pris-boks" style="display:none;">
-<div class="pris-linje"><span id="pris-utstyr"></span></div>
-<div class="pris-linje pris-detalj"><span id="pris-dager"></span></div>
-<div class="pris-linje pris-detalj" id="rabatt-linje" style="display:none; color:#28a745;">
-<span id="pris-rabatt"></span>
-</div>
-<div class="pris-total">Estimert pris: <strong id="pris-sum"></strong></div>
-<p class="pris-merknad">Endelig pris bekreftes når vi tar kontakt.</p>
-</div>
+    <p class="dato-merknad">Minimum leieperiode er 3 dager. Leier du mer enn 3 dager får du <strong>10% rabatt</strong> 🎉</p>
 
-<div class="form-felt">
-<label for="adresse">Leveringsadresse *</label>
-<input type="text" id="adresse" name="adresse" placeholder="Gateadresse, postnummer, by" required>
-</div>
+    <div id="pris-boks" class="pris-boks" style="display:none;">
+        <div class="pris-linje"><span id="pris-utstyr"></span></div>
+        <div class="pris-linje pris-detalj"><span id="pris-dager"></span></div>
+        <div class="pris-linje pris-detalj" id="rabatt-linje" style="display:none; color:#28a745;">
+            <span id="pris-rabatt"></span>
+        </div>
+        <div class="pris-total">Estimert pris: <strong id="pris-sum"></strong></div>
+        <p class="pris-merknad">Endelig pris bekreftes når vi tar kontakt.</p>
+    </div>
 
-<div class="form-felt">
-<label for="melding">Anledning / tilleggsinfo</label>
-<textarea id="melding" name="melding" rows="4"
-placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
-</div>
+    <div class="form-felt">
+        <label for="adresse">Leveringsadresse *</label>
+        <input type="text" id="adresse" name="adresse" placeholder="Gateadresse, postnummer, by" required>
+    </div>
 
-<button type="submit" class="send-btn">Send reservasjon</button>
+    <div class="form-felt">
+        <label for="melding">Anledning / tilleggsinfo</label>
+        <textarea id="melding" name="melding" rows="4"
+            placeholder="F.eks. bursdag, bryllup, konfirmasjon, antall gjester..."></textarea>
+    </div>
 
-<p class="form-merknad">
-Vi svarer vanligvis innen noen timer. Sjekk gjerne
-<a href="index.html#kalender">tilgjengelighetskalenderen</a> først.
-</p>
+    <button type="submit" class="send-btn" id="sendBtn">Send reservasjon</button>
+
+    <p class="form-merknad">
+        Vi svarer vanligvis innen noen timer. Sjekk gjerne
+        <a href="index.html#kalender">tilgjengelighetskalenderen</a> først.
+    </p>
 </form>
 </section>
 </main>
@@ -137,12 +137,10 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
         document.getElementById('mobil-meny').classList.remove('aapen');
         document.getElementById('hamburger').classList.remove('aapen');
     }
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', function(e) {
         const meny = document.getElementById('mobil-meny');
         const btn  = document.getElementById('hamburger');
-        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) {
-            lukkMeny();
-        }
+        if (meny.classList.contains('aapen') && !meny.contains(e.target) && !btn.contains(e.target)) lukkMeny();
     });
 
     /* ── Prisberegning ── */
@@ -152,7 +150,9 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
         "Begge deler":                 { helg: 600, uke: 950 }
     };
 
-    window.addEventListener('DOMContentLoaded', function () {
+    let beregnetPris = "";
+
+    window.addEventListener('DOMContentLoaded', function() {
         const idag = new Date().toISOString().split('T')[0];
         document.getElementById('startdato').min = idag;
     });
@@ -165,9 +165,7 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
         const minSluttdato = start.toISOString().split('T')[0];
         const sluttFelt = document.getElementById('sluttdato');
         sluttFelt.min = minSluttdato;
-        if (sluttFelt.value && sluttFelt.value < minSluttdato) {
-            sluttFelt.value = minSluttdato;
-        }
+        if (sluttFelt.value && sluttFelt.value < minSluttdato) sluttFelt.value = minSluttdato;
         beregnPris();
     }
 
@@ -176,18 +174,13 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
         const start  = document.getElementById('startdato').value;
         const slutt  = document.getElementById('sluttdato').value;
         const boks   = document.getElementById('pris-boks');
-
         if (!utstyr || !start || !slutt) { boks.style.display = 'none'; return; }
-
         const dager = Math.round((new Date(slutt) - new Date(start)) / (1000 * 60 * 60 * 24));
         if (dager < 1) { boks.style.display = 'none'; return; }
-
         const p = priser[utstyr.value];
         const dagsprisHelg = Math.round(p.helg / 3);
         const dagsprisUke  = Math.round(p.uke  / 7);
-
         let totalPris, periodeText;
-
         if (dager <= 3) {
             totalPris   = p.helg;
             periodeText = `${dager} dag${dager > 1 ? 'er' : ''} — grunnpris`;
@@ -205,24 +198,60 @@ Vi svarer vanligvis innen noen timer. Sjekk gjerne
             totalPris   = p.uke + ekstra * dagsprisUke;
             periodeText = `Ukespris (${p.uke} kr) + ${ekstra} ekstra dag${ekstra > 1 ? 'er' : ''} (${ekstra} × ${dagsprisUke} kr)`;
         }
-
-        /* 10% rabatt for leie over 3 dager */
         const rabattLinje = document.getElementById('rabatt-linje');
         const prisRabatt  = document.getElementById('pris-rabatt');
         if (dager > 3) {
-            const rabatt   = Math.round(totalPris * 0.10);
-            totalPris      = Math.round(totalPris * 0.90);
-            prisRabatt.textContent  = `10% rabatt (−${rabatt.toLocaleString('no-NO')} kr)`;
+            const rabatt = Math.round(totalPris * 0.10);
+            totalPris    = Math.round(totalPris * 0.90);
+            prisRabatt.textContent   = `10% rabatt (−${rabatt.toLocaleString('no-NO')} kr)`;
             rabattLinje.style.display = 'block';
         } else {
             rabattLinje.style.display = 'none';
         }
-
+        beregnetPris = `${totalPris.toLocaleString('no-NO')} kr (${periodeText}${dager > 3 ? ', inkl. 10% rabatt' : ''})`;
         document.getElementById('pris-utstyr').textContent = utstyr.value;
         document.getElementById('pris-dager').textContent  = periodeText;
         document.getElementById('pris-sum').textContent    = totalPris.toLocaleString('no-NO') + ' kr';
-        document.getElementById('skjult-pris').value       = `${totalPris} kr (${periodeText}${dager > 3 ? ', inkl. 10% rabatt' : ''})`;
         boks.style.display = 'block';
+    }
+
+    /* ── Send bestilling til API ── */
+    async function sendBooking(e) {
+        e.preventDefault();
+        const btn  = document.getElementById('sendBtn');
+        const feil = document.getElementById('feilMelding');
+        feil.style.display = 'none';
+        btn.disabled    = true;
+        btn.textContent = 'Sender...';
+
+        const utstyrEl = document.querySelector('input[name="utstyr"]:checked');
+        const body = {
+            customerName:    document.getElementById('navn').value.trim(),
+            customerEmail:   document.getElementById('epost').value.trim(),
+            customerPhone:   document.getElementById('telefon').value.trim(),
+            equipment:       utstyrEl ? utstyrEl.value : '',
+            startDate:       document.getElementById('startdato').value,
+            endDate:         document.getElementById('sluttdato').value,
+            deliveryAddress: document.getElementById('adresse').value.trim(),
+            message:         document.getElementById('melding').value.trim() || null,
+            estimatedPrice:  beregnetPris || null,
+        };
+
+        try {
+            const r = await fetch('https://simonsen-utleie-format.replit.app/api/orders', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(body),
+            });
+            if (!r.ok) throw new Error();
+            window.location.href = 'takk.html';
+        } catch {
+            feil.textContent    = 'Noe gikk galt. Prøv igjen eller send e-post direkte til simonsen.andreas@gmail.com';
+            feil.style.display  = 'block';
+            feil.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            btn.disabled    = false;
+            btn.textContent = 'Send reservasjon';
+        }
     }
 </script>
 
