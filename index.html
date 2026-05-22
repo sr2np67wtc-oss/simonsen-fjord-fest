@@ -109,22 +109,23 @@
 <div class="rad bunn-rad">
 <section id="anmeldelser" class="anmeldelser">
 <h2>Hva kundene sier</h2>
-<div class="anmeldelser-kolonne">
-<div class="anmeldelse">
-<div class="stjerner">★★★★★</div>
-<p class="sitat">"Utrolig enkelt å bestille, og høyttaleren var akkurat det vi trengte til hagefesten. Anbefales på det varmeste!"</p>
-<p class="kunde">— Maria S., Stavanger</p>
-</div>
-<div class="anmeldelse">
-<div class="stjerner">★★★★★</div>
-<p class="sitat">"Rask levering, godt utstyr og hyggelig service. Mikrofonene fungerte perfekt til konfirmasjonstalen."</p>
-<p class="kunde">— Thomas H., Sandnes</p>
-</div>
-<div class="anmeldelse">
-<div class="stjerner">★★★★★</div>
-<p class="sitat">"Brukte JBL-en på bursdag. Super lydkvalitet og enkel å bruke!"</p>
-<p class="kunde">— Line K., Stavanger</p>
-</div>
+<div class="anmeldelser-kolonne" id="anmeldelserListe">
+    <!-- Fylles automatisk fra API. Reserveinnhold vises om API feiler. -->
+    <div class="anmeldelse reserve">
+        <div class="stjerner">★★★★★</div>
+        <p class="sitat">"Utrolig enkelt å bestille, og høyttaleren var akkurat det vi trengte til hagefesten. Anbefales på det varmeste!"</p>
+        <p class="kunde">— Maria S., Stavanger</p>
+    </div>
+    <div class="anmeldelse reserve">
+        <div class="stjerner">★★★★★</div>
+        <p class="sitat">"Rask levering, godt utstyr og hyggelig service. Mikrofonene fungerte perfekt til konfirmasjonstalen."</p>
+        <p class="kunde">— Thomas H., Sandnes</p>
+    </div>
+    <div class="anmeldelse reserve">
+        <div class="stjerner">★★★★★</div>
+        <p class="sitat">"Brukte JBL-en på bursdag. Super lydkvalitet og enkel å bruke!"</p>
+        <p class="kunde">— Line K., Stavanger</p>
+    </div>
 </div>
 </section>
 
@@ -203,6 +204,40 @@
         }
     });
 
+    /* ── Anmeldelser fra API ── */
+    const STJERNER = ['', '★', '★★', '★★★', '★★★★', '★★★★★'];
+
+    async function hentAnmeldelser() {
+        try {
+            const r = await fetch('https://simonsen-utleie-format.replit.app/api/reviews');
+            if (!r.ok) return;
+            const liste = await r.json();
+            if (!liste || liste.length === 0) return; // behold reserve-anmeldelsene
+
+            const beholder = document.getElementById('anmeldelserListe');
+            // Fjern reserve-anmeldelsene
+            beholder.querySelectorAll('.reserve').forEach(el => el.remove());
+
+            liste.forEach(function(a) {
+                const div = document.createElement('div');
+                div.className = 'anmeldelse';
+                div.innerHTML =
+                    '<div class="stjerner">' + (STJERNER[a.rating] || '★★★★★') + '</div>' +
+                    '<p class="sitat">"' + tekstSikker(a.comment) + '"</p>' +
+                    '<p class="kunde">— ' + tekstSikker(a.customerName) + '</p>';
+                beholder.appendChild(div);
+            });
+        } catch (e) {
+            // API ikke tilgjengelig — reserve-anmeldelsene vises som de er
+        }
+    }
+
+    function tekstSikker(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     /* ── Kalender ── */
     const API_URL = "https://simonsen-utleie-format.replit.app/api/bookings";
     const MAANEDER = ["januar","februar","mars","april","mai","juni",
@@ -276,6 +311,7 @@
         });
 
         hentOpptatteDager();
+        hentAnmeldelser();
     });
 </script>
 
